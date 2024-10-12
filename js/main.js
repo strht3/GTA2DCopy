@@ -1,6 +1,6 @@
 var data = 'assets/data/data.js'
 var mainScene = new Phaser.Scene("mainScene");
-
+//テスト
 mainScene.create = function (data) {
     //初期設定
     this.config();
