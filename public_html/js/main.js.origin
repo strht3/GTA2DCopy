@@ -1,0 +1,137 @@
+var data = 'assets/data/data.js'
+var mainScene = new Phaser.Scene("mainScene");
+
+
+mainScene.create = function (data) {
+    this.config();
+    this.createMap();
+    this.cameras.main.setBackgroundColor("#FFFFFF");
+    /*// スプライト画像の表示
+    this.player = this.add.sprite(400, 300, 'player');
+    // スプライト画像のサイズを1.5倍にする
+    this.player.setScale(1.5);
+    // 最初のフレームを0番にする
+    this.player.setFrame(0);
+    
+    // 正面を向く
+    this.anims.create({
+        key: 'turn',
+        frames: [ { key: 'player', frame: 0 } ],
+        frameRate: 20
+    });
+    // 左向きのアニメーション
+    this.anims.create({
+        key: 'left',
+        frames: this.anims.generateFrameNumbers('player', { start: 3, end: 5 }),
+        frameRate: 10,
+        repeat: -1
+    });
+    // 右向きのアニメーション
+    this.anims.create({
+        key: 'right',
+        frames: this.anims.generateFrameNumbers('player', { start: 6, end: 8 }),
+        frameRate: 10,
+        repeat: -1
+    });
+    // 上向きのアニメーション
+    this.anims.create({
+        key: 'up',
+        frames: this.anims.generateFrameNumbers('player', { start: 9, end: 11 }),
+        frameRate: 10,
+        repeat: -1
+    });
+    // 下向きのアニメーション
+    this.anims.create({
+        key: 'down',
+        frames: this.anims.generateFrameNumbers('player', { start: 0, end: 2 }),
+        frameRate: 10,
+        repeat: -1
+    });*/
+};
+
+mainScene.update = function() {
+    /*
+    var speed = 5;
+    var cursors = this.input.keyboard.createCursorKeys();
+    if(cursors.right.isDown) {
+        // 右に移動
+        this.player.x += speed;
+        // 右向きのアニメーション
+        this.player.anims.play('right',true)
+    } else if(cursors.left.isDown) {
+        // 左に移動
+        this.player.x -= speed;
+        // 左向きのアニメーション
+        this.player.anims.play('left',true)
+    } else if(cursors.up.isDown) {
+        // 上に移動
+        this.player.y -= speed;
+        // 上向きのアニメーション
+        this.player.anims.play('up',true)
+    } else if(cursors.down.isDown) {
+        // 下に移動
+        this.player.y += speed;
+        // 下向きのアニメーション
+        this.player.anims.play('down',true)
+    } else {
+        // キーを放すとアニメーション停止
+        this.player.anims.stop();
+        // キーを放すと正面を向く
+        //this.player.anims.play('turn', true);
+    }*/
+};
+
+mainScene.config = function () {
+    this.TILE_WIDTH = 17;
+    this.TILE_HEIGTH = 17
+    this.TILE_MARGIN = 0;
+    this.TILE_SPACING = 0;
+    this.TILE_SCALE = 4;
+    this.TILE_COLUMN = 36;
+    /*this.speed = 250;
+    this.playerHP = 10;*/
+};
+mainScene.createMap = function() {
+    this.map = this.make.tilemap({key:"map01"});
+    
+    this.tiles= this.map.addTilesetImage(
+        "tilemap",
+        "tilemap",
+        this.TILE_WIDTH,
+        this.TILE_HEIGTH,
+        this.TILE_MARGIN,
+        this.TILE_SPACING,
+    );
+    
+    var layerW = this.TILE_WIDTH * this.TILE_SCALE*35; //* this.TILE_COLUMN;
+    var layerH = this.TILE_HEIGTH * this.TILE_SCALE*50; //* this.TILE_COLUMN;
+    
+    this.groundLayer = this.map.createLayer("Ground",this.tiles,0,0);
+    this.groundLayer.setDisplaySize(layerW,layerH);
+    
+    this.borderLayer = this.map.createLayer("Border", this.tiles,0,0);
+    this.borderLayer.setDisplaySize(layerW,layerH);
+    this.borderLayer.setCollisionByExclusion([-1]);
+    
+    this.worldLayer = this.map.createLayer("World", this.tiles, 0,0);
+    this.worldLayer.setDisplaySize(layerW,layerH);
+    this.worldLayer.setCollisionByExclusion([-1]);
+    
+    this.environmentleLayer = this.map.createLayer(
+        "Environment",
+        this.tiles,
+        0,
+        0,
+        );
+        this.environmentleLayer.setDisplaySize(layerW,layerH)
+        
+        this.physics.world.bounds.width = this.groundLayer.displayWidth;
+        this.physics.world.bounds.height = this.groundLayer.displayHeight;
+        
+        this.cameras.main.setBounds(
+            0,
+            0,
+            this.physics.world.bounds.width,
+            this.physics.world.bounds.height,
+            );
+};

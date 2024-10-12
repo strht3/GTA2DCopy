@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<script src="//cdn.jsdelivr.net/npm/phaser@3.21.0/dist/phaser.js"></script>
+<style>
+body {
+  margin: 0;
+}
+</style>
+<script>
+var mainScene = new Phaser.Scene("mainScene");
+
+mainScene.preload = function () {
+    // 画像の読み込み
+    this.load.image('shop', './assets/images/GunShop.jpg');
+    this.load.image('bat', './assets/images/Bat.png');
+};
+
+mainScene.create = function () {
+    // 画像の表示
+    var shop = this.add.image(400,300,'shop');
+    shop.setAlpha(0.4);
+    var bat = this.add.image(400,300,'bat');
+    bat.setDisplaySize(150, 150);
+    
+    // 最初の位置を保持
+    bat.originalPositionX = bat.x;
+    bat.originalPositionY = bat.y;
+    
+    // ドラッグを有効にする
+    bat.setInteractive({ draggable: true });
+    
+    // ドラッグイベント：ドラッグをした時に実行される
+    bat.on('drag', (pointer, dragX, dragY) => {
+        this.moveItemByDrug(pointer, dragX, dragY, bat);
+    });
+    // ドラッグエンドイベント：ドラッグが終わった時に実行される
+    bat.on('dragend', (pointer, dragX, dragY) => {
+        this.setItemPositionByDrug(pointer, dragX, dragY, bat);
+    });    
+
+};
+
+// ドラッグしている時に画像をカーソルに合わせて移動
+mainScene.moveItemByDrug = function(pointer, dragX, dragY, bat) {
+    console.log(dragX, dragY);
+    bat.x = dragX;
+    bat.y = dragY;
+}
+
+// ドラッグが終わったタイミングで特定の座標の範囲にいたら定位置に移動
+// 特定の座標の範囲にいない場合は、元の場所に戻す
+mainScene.setItemPositionByDrug = function(pointer, dragX, dragY, bat) {
+    console.log('bat', bat.x, bat.y);
+    console.log('pointer', pointer.x, pointer.y);
+    if (bat.x >= 98 && bat.x <= 102 && bat.y >= 98 && bat.y <= 102) {
+        // 特定の場所までドラッグしたら移動
+        bat.x = 100;
+        bat.y = 100;
+        
+    } else {
+        // それ以外はスタート位置に戻す
+        bat.x = bat.originalPositionX;
+        bat.y = bat.originalPositionY;
+    }
+    
+
+}
+
+
+var config = {
+    type: Phaser.AUTO,
+    width: 800,
+    height: 600,
+    scene: [mainScene],
+};
+
+var game = new Phaser.Game(config);
+</script>
+</head>
+<body>
+</body>
+</html>

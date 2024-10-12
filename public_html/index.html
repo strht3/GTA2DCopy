@@ -2,29 +2,68 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<script src="//cdn.jsdelivr.net/npm/phaser@3.17.0/dist/phaser.js"></script>
+<link rel="preload" href="./assets/Fonts/GTAFonts.woff" as="font" type="font/woff2" crossorigin>
+<script src="//cdn.jsdelivr.net/npm/phaser@3.60.0/dist/phaser.js"></script>
 <script src="./js/load.js"></script>
+<script src="./assets/data/data.js"></script>
 <script src="./js/start.js"></script>
 <script src="./js/main.js"></script>
+<script src="./js/inventory.js"></script>
+<script src="./js/shop.js"></script>
+<script src="./js/Settings.js"></script>
 <style>
-body {
-  margin: 0;
+@font-face {
+  font-family: gtaFontNormal;
+  src: url('./assets/Fonts/GTAFonts.woff');
+}
+* {
+    margin: 0;
+    padding: 0;
+}
+html, body {
+    height: 100%;
+    overflow: hidden;
 }
 </style>
 <script>
+//import UIPlugin from 'node_modules/phaser3-rex-plugins/templates/ui/ui-plugin.js';
 var config = {
     type: Phaser.AUTO,
-    width: 800,
-    height: 600,
+    width: window.innerWidth,
+    height: window.innerHeight,
+    pixelArt: true, // texture bleedingを消す
+    roundPixels: true, // texture bleedingを消す
+    audio: {
+        disableWebAudio: true
+    },
+/*
+    plugins: {
+        scene: [{
+            key: 'rexUI',
+            plugin: UIPlugin,
+            mapping: 'rexUI'
+        },
+        // ...
+        ]
+    },
+*/
     physics: {
         default: 'arcade',
         arcade: {
-            debug: false
+            gravity:{ y: 0 },
+            debug: true
         }
     },
-    scene: [loadScene, startScene, mainScene],
+    scene: [loadScene, startScene, mainScene, inventoryScene, shopScene, Settings],
+    parent: 'phaser-container',
+	dom: {
+        createContainer: true
+    },
 };
 var game = new Phaser.Game(config);
+window.addEventListener("resize", function (event) {
+    game.scale.resize(window.innerWidth, window.innerHeight);
+}, false);
 </script>
 </head>
 <body>
