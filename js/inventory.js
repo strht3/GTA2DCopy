@@ -41,6 +41,7 @@ inventoryScene.onWake = function(sys, data) {
         var itemY = 240 + 66 * Math.floor(i / 10);
         var item = this.add.image(itemX,itemY,this.item.Bag[i])
         item.setDisplaySize(50,50)
+        item.setDraggable()
     }
     for (var x in this.item.Hand) {
         var itemX = 535 + 59 * (x % 10);
