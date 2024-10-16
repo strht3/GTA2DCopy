@@ -1,13 +1,16 @@
 // スタート画面のシーン
 var inventoryScene = new Phaser.Scene("Inventory");
 inventoryScene.create = function (data) {
+    //background
     this.drawBackground();
+    //key settings
     this.keys = {};
     this.keys.keyE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
     
     // スリープが解除されたときに呼ぶメソッドを定義
     this.events.on("wake", this.onWake, this);
     this.input.on('pointerdown', this.onPointerDown, this);
+    //inventory images
     var inventoryImage = this.add.image(400,300,'inventory');
     
     inventoryImage.displayWidth = 800;
@@ -16,6 +19,7 @@ inventoryScene.create = function (data) {
 inventoryScene.update = function() {
 };
 inventoryScene.onPointerDown = function(pointer , over) {
+    //if clicked outside the box, close scene + send all datas
     if(!(pointer.position.x > 330 && pointer.position.x < 1130 && pointer.position.y > 142.5 && pointer.position.y < 742.5)){
         this.scene.sleep("Inventory");
         this.scene.wake("mainScene",  {
@@ -35,21 +39,24 @@ inventoryScene.drawBackground = function(){
 inventoryScene.onWake = function(sys, data) {
     // メインシーンからデータを受け取る
     this.item = data.item;
-    this.money = data.money
+    this.money = data.money;
     for (var i in this.item.Bag) {
+        //calculation of position of items + Placing images
         var itemX = 30 + 59 * (i % 10);
         var itemY = 240 + 66 * Math.floor(i / 10);
         var item = this.add.image(itemX,itemY,this.item.Bag[i])
         item.setDisplaySize(50,50)
-        item.setDraggable()
+        //item.setDraggable()
     }
     for (var x in this.item.Hand) {
+        //calculation of position of items + Placing images
         var itemX = 535 + 59 * (x % 10);
         var itemY = 43
         var item = this.add.image(itemX,itemY,this.item.Hand[x])
         item.setDisplaySize(50,50)
     }
     for (var y in this.item.Armour) {
+        //calculation of position of items + Placing images
         var itemX = 771
         var itemY = 306  + 66 * (y % 10);
         var item = this.add.image(itemX,itemY,this.item.Armour[y])

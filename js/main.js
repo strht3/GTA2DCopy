@@ -1,6 +1,5 @@
 var data = 'assets/data/data.js'
 var mainScene = new Phaser.Scene("mainScene");
-//テスト
 mainScene.create = function (data) {
     //初期設定
     this.config();
@@ -32,8 +31,7 @@ mainScene.create = function (data) {
     this.createWays();
     //衝突作成
     this.setCollider();
-    //
-    //key
+    //key settings
     this.keys = {};
     this.keys.keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
     this.keys.keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
@@ -45,6 +43,7 @@ mainScene.create = function (data) {
     this.keys.key1 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ONE);
 };
 mainScene.update = function() {
+    //move player if it is showed
     if(this.player.active == true){
         this.moveplayer();
     }
@@ -53,11 +52,12 @@ mainScene.update = function() {
 
 
 mainScene.config = function () {
+    //datas
     this.enemyData = [{
             name:'enemy01',
             hp:3,
         }];
-    this.enemyMovement = ['up','down','right','left','turn'];
+    this.enemyMovement = ['up','down','right','left','turn']; //enemy movement settings
     this.TILE_WIDTH = 16; // 画像タイルのサイズ
     this.TILE_HEIGTH = 16; // 画像タイルのサイズ
     this.TILE_MARGIN = 0;
@@ -66,19 +66,21 @@ mainScene.config = function () {
     this.TILE_COLUMN = 35;
     this.TILE_ROW = 50;
     
+    //Player health
     this.PlayerHealth = parseFloat(localStorage.getItem('health')) || 15;
 };
 mainScene.onWake = function(sys, data){
+    //when scene is awake, set all datas back to its normal position
     if(data.money == undefined || data.item == undefined){
         return;
     }
-    console.log(data.item);
     this.item = data.item;
     this.setMoney(data.money, "Set");
 }
 mainScene.createMap = function() {
+    //map settings
     this.map = this.make.tilemap({key:"map01"});
-    //タイル？
+    //タイル
     this.tiles= this.map.addTilesetImage(
         "tilemap",
         "tilemap",
@@ -90,18 +92,18 @@ mainScene.createMap = function() {
     //大きさ設定
     var layerW = this.TILE_WIDTH * this.TILE_SCALE* this.TILE_COLUMN;
     var layerH = this.TILE_HEIGTH * this.TILE_SCALE* this.TILE_ROW;
-    //レイヤー
+    //ground layer
     this.groundLayer = this.map.createLayer("Ground",this.tiles,0,0);
     this.groundLayer.setDisplaySize(layerW,layerH);
-    
+    //environment layer
     this.environmentleLayer = this.map.createLayer("Environment",this.tiles,0,0,);
-    //チェック
     this.environmentleLayer.setDisplaySize(layerW,layerH);
-    
+    //border layer
     this.borderLayer = this.map.createLayer("Border", this.tiles, 0, 0);
     this.borderLayer.setDisplaySize(layerW,layerH);
     this.borderLayer.setCollisionByExclusion([-1]);
     
+    //world layer
     this.worldLayer = this.map.createLayer("World", this.tiles, 0, 0);
     this.worldLayer.setDisplaySize(layerW,layerH);
     this.worldLayer.setCollisionByExclusion([-1]);
