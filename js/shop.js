@@ -125,7 +125,6 @@ shopScene.createTextArea = function() {
                 if (!item) {
                     return;
                 }
-                console.log()
                 //purchase code
                 if(this.money >= this.ProductOnSale[item].Price){
                     this.money -= this.ProductOnSale[item].Price;

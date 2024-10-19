@@ -19,7 +19,6 @@ Settings.create = function (data) {
     this.money = data.money
 };
 Settings.onPointerDown = function(pointer , over) {
-    //console.log(pointer.position.x + " " + pointer.position.y)
     if(!(pointer.position.x > 516 && pointer.position.x < 972 && pointer.position.y > 78 && pointer.position.y < 781)){
         this.scene.sleep("Settings");
         this.scene.wake("mainScene",  {

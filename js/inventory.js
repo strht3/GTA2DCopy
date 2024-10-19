@@ -41,6 +41,7 @@ inventoryScene.onWake = function(sys, data) {
     // メインシーンからデータを受け取る
     this.item = data.item;
     this.money = data.money;
+    console.log(this.item);
     for (var i in this.item.Bag) {
         //calculation of position of items + Placing images
         var itemX = 30 + 59 * (i % 10);
