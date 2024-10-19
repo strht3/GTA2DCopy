@@ -31,16 +31,13 @@ startScene.create = function () {
     // キーをクリックするとゲームスタート
     this.input.keyboard.on('keydown', function(event) {
         if(!this.scene.isSleeping("Inventory")) {
-            /*
             // インベントリシーンを起動
-            this.scene.start("Inventory");
+            this.scene.start("Inventory",{
+                'item' : this.item,
+                'money' : this.PlayerMoney,
+            });
             // インベントリシーンを待機状態にする
             this.scene.sleep("Inventory");
-            */
-           this.scene.run("Inventory", {
-            'item' : this.item,
-            'money' : this.PlayerMoney,
-        })
         }
         if(!this.scene.isSleeping("Shop")) {
             this.scene.run("Shop", {
