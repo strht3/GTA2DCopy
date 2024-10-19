@@ -15,6 +15,8 @@ Settings.create = function (data) {
     // スリープが解除されたときに呼ぶメソッドを定義
     this.events.on("wake", this.onWake, this);
     this.input.on('pointerdown', this.onPointerDown, this);
+    this.item = data.item
+    this.money = data.money
 };
 Settings.onPointerDown = function(pointer , over) {
     //console.log(pointer.position.x + " " + pointer.position.y)

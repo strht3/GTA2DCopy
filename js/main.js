@@ -9,17 +9,8 @@ mainScene.create = function (data) {
     //マップ作成
     this.createMap()
     this.createUI();
-    if(localStorage.getItem('items') === 'undefined'){
-        this.item = {};
-        this.item.Bag = [
-        ];
-        this.item.Hand = [
-        ];
-        this.item.Armour = [
-        ];
-    }else{
-        this.item = JSON.parse(localStorage.getItem('items'));
-    }
+    this.item = data.item
+    this.money = data.money
     //プレイヤー作成
     this.createPlayer();
     //敵作成

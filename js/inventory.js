@@ -12,7 +12,8 @@ inventoryScene.create = function (data) {
     this.input.on('pointerdown', this.onPointerDown, this);
     //inventory images
     var inventoryImage = this.add.image(400,300,'inventory');
-    
+    this.item = data.item
+    this.money = data.money
     inventoryImage.displayWidth = 800;
     inventoryImage.displayHeight = 600;
 };
