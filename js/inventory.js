@@ -136,4 +136,5 @@ inventoryScene.setItemPositionByDrug = function(pointer, dragX, dragY, item,i) {
         item.x = item.originalPositionX;
         item.y = item.originalPositionY;
     }
+    localStorage.setItem('items',JSON.stringify(this.item));
 }
