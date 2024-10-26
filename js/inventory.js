@@ -32,6 +32,7 @@ inventoryScene.onPointerDown = function(pointer , over) {
         });
     }
 };
+
 inventoryScene.drawBackground = function(){
     // シーン全体の背景色 黒の透過画面
     this.cameras.main.setBackgroundColor();
