@@ -41,6 +41,8 @@ inventoryScene.drawBackground = function(){
     this.cameras.main.centerOn(400, 300);
 };
 inventoryScene.onWake = function(sys, data) {
+    var allSprites = this.children.list.filter(x => x instanceof Phaser.GameObjects.Image)
+    allSprites.forEach(x => x.destroy());
     // メインシーンからデータを受け取る
     this.item = data.item;
     this.money = data.money;
