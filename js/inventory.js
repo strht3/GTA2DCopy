@@ -1,5 +1,6 @@
 // スタート画面のシーン
 var inventoryScene = new Phaser.Scene("Inventory");
+
 inventoryScene.create = function (data) {
     //background
     this.drawBackground();
