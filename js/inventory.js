@@ -95,7 +95,7 @@ inventoryScene.setItemPositionByDrug = function(pointer, dragX, dragY, item,i) {
             return;
         }
         //inventoryScene.item.Hand[this.item.Hand.length] = item.texture.key;
-        inventoryScene.item.Hand.push(item.texture.key);
+        inventoryScene.item.Hand.push(item.texture.key)
         inventoryScene.item.Bag.splice( item.Num, 1 );
         localStorage.setItem('items',JSON.stringify(this.item));
     } else if(pointer.x >= 912 && pointer.x <= 965 && pointer.y >= 144 && pointer.y <= 204){
