@@ -41,13 +41,12 @@ inventoryScene.drawBackground = function(){
 inventoryScene.onWake = function(sys, data) {
     var allSprites = this.children.list.filter(x => x instanceof Phaser.GameObjects.Image)
     allSprites.forEach(x => x.destroy());
-    var inventoryImage = this.add.image(400,300,'inventory');
-    inventoryImage.displayWidth = 800;
-    inventoryImage.displayHeight = 600;
     // メインシーンからデータを受け取る
     this.item = data.item;
     this.money = data.money;
-    console.log(this.item);
+    var inventoryImage = this.add.image(400,300,'inventory');
+    inventoryImage.displayWidth = 800;
+    inventoryImage.displayHeight = 600;
     for (var i in this.item.Bag) {
         //calculation of position of items + Placing images
         var itemX = 30 + 59 * (i % 10);
