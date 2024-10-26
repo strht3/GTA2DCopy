@@ -16,6 +16,7 @@ mainScene.create = function (data) {
     //敵作成
     this.createEnemyGroup();
     //攻撃作成
+    this.createAttackAnimation();
     this.createPunchGroup();
     //障害物作成
     this.createCarGroup();
@@ -32,6 +33,10 @@ mainScene.create = function (data) {
     this.keys.keyL = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.L);
     this.keys.keyM = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.M);
     this.keys.key1 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ONE);
+    this.keys.key2 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.TWO);
+    this.keys.key3 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.THREE);
+    this.keys.key4 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.FOUR);
+    this.keys.key5 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.FIVE);
 };
 mainScene.update = function() {
     //move player if it is showed
@@ -652,6 +657,30 @@ mainScene.createEnemyAnimation = function(enemy){
         repeat: 0
     });
 }
+mainScene.createAttackAnimation = function(){
+    this.anims.create({
+        key: 'BatSmash',
+        frames: this.anims.generateFrameNumbers('Explosion', { start: 1, end: 7 }),
+        frameRate: 10
+    });
+    this.anims.create({
+        key: 'KnifeSlash',
+        frames: this.anims.generateFrameNumbers('KnifeSlash', { start: 1, end: 7 }),
+        frameRate: 10
+    });
+    this.anims.create({
+        key: 'KatanaSlash',
+        frames: this.anims.generateFrameNumbers('KatanaSlash', { start: 1, end: 4 }),
+        frameRate: 10,
+        repeat: 5
+    });
+    this.anims.create({
+        key: 'GunBarrage',
+        frames: this.anims.generateFrameNumbers('machinegun', { start: 1, end: 2 }),
+        frameRate: 10,
+        repeat: 10
+    });
+}
 mainScene.createPunchGroup = function(){
     this.PunchGroup = this.physics.add.group();
     this.physics.add.overlap(this.enemyGroup,this.PunchGroup,this.PlayerAttack,null,this);
@@ -659,23 +688,67 @@ mainScene.createPunchGroup = function(){
     this.physics.add.collider(this.PunchGroup,this.borderLayer,this.punchHitWall,null,this);
 }
 mainScene.punchBeam = function(direction){
-    
+    var attacktype = 'fireball';
+    if(this.keys.key1.isDown){
+        if(this.item.Hand[0] == null){
+            attacktype = 'fireball';
+            return;
+        }
+        attacktype = this.item.Hand[0]
+    }else if(this.keys.key2.isDown){
+        if(this.item.Hand[1] == null){
+            attacktype = 'fireball';
+            return;
+        }
+        attacktype = this.item.Hand[1]
+    }else if(this.keys.key3.isDown){
+        if(this.item.Hand[2] == null){
+            attacktype = 'fireball';
+            return;
+        }
+        attacktype = this.item.Hand[2]
+    }else if(this.keys.key4.isDown){
+        if(this.item.Hand[3] == null){
+            attacktype = 'fireball';
+            return;
+        }
+        attacktype = this.item.Hand[3]
+    }else if(this.keys.key5.isDown){
+        if(this.item.Hand[4] == null){
+            attacktype = 'fireball';
+            return;
+        }
+        attacktype = this.item.Hand[4]
+    }
     var posX = this.player.x;
     var posY = this.player.y;
-    var punch = this.PunchGroup.create(posX,posY,'fireball');
-    if(direction == 'right'){
-        punch.setAngle(90);
-        punch.setVelocityX(300);
-    }else if(direction == 'left'){
-        punch.setAngle(270);
-        punch.setVelocityX(-300);
-    }else if(direction == 'down'){
-        punch.setAngle(180);
-        punch.setVelocityY(300)
-    }else if(direction == 'up'){
-        punch.setAngle(0);
-        punch.setVelocityY(-300);
+    var punch = this.PunchGroup.create(posX,posY,attacktype);
+    if(attacktype == 'fireball' || attacktype == 'Glock17'){
+        if(direction == 'right'){
+            punch.setAngle(90);
+            punch.setVelocityX(300);
+        }else if(direction == 'left'){
+            punch.setAngle(270);
+            punch.setVelocityX(-300);
+        }else if(direction == 'down'){
+            punch.setAngle(180);
+            punch.setVelocityY(300)
+        }else if(direction == 'up'){
+            punch.setAngle(0);
+            punch.setVelocityY(-300);
+        }
+    }else {
+        if(direction == 'right'){
+            punch.setAngle(90);
+        }else if(direction == 'left'){
+            punch.setAngle(270);
+        }else if(direction == 'down'){
+            punch.setAngle(180);
+        }else if(direction == 'up'){
+            punch.setAngle(0);
+        }
     }
+    
     this.punchcooldown = this.time.addEvent({
         delay:500,
         callback:this.punchFalse,

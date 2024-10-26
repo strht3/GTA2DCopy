@@ -21,6 +21,7 @@ inventoryScene.create = function (data) {
 inventoryScene.update = function() {
 };
 inventoryScene.onPointerDown = function(pointer , over) {
+    console.log(pointer.x + " " + pointer.y)
     //if clicked outside the box, close scene + send all datas
     if(!(pointer.position.x > 330 && pointer.position.x < 1130 && pointer.position.y > 142.5 && pointer.position.y < 742.5)){
         this.scene.sleep("Inventory");
@@ -49,7 +50,18 @@ inventoryScene.onWake = function(sys, data) {
         var itemY = 240 + 66 * Math.floor(i / 10);
         var item = this.add.image(itemX,itemY,this.item.Bag[i])
         item.setDisplaySize(50,50)
-        //item.setDraggable()
+        item.originalPositionX = item.x;
+        item.originalPositionY = item.y;
+        item.setInteractive({ draggable: true });
+        
+        // ドラッグイベント：ドラッグをした時に実行される
+        this.input.on('drag', (pointer, item, dragX, dragY) => {
+            this.moveItemByDrug(pointer, dragX, dragY, item);
+        });
+        // ドラッグエンドイベント：ドラッグが終わった時に実行される
+        this.input.on('dragend', (pointer, item, dragX, dragY) => {
+            this.setItemPositionByDrug(pointer, dragX, dragY, item);
+        }); 
     }
     for (var x in this.item.Hand) {
         //calculation of position of items + Placing images
@@ -67,3 +79,41 @@ inventoryScene.onWake = function(sys, data) {
     }
     this.sound.play('inventory', {volume: 1, loop:false});
 };
+inventoryScene.moveItemByDrug = function(pointer, dragX, dragY, item) {
+    item.x = dragX;
+    item.y = dragY;
+}
+inventoryScene.setItemPositionByDrug = function(pointer, dragX, dragY, item) {
+    if (pointer.x >= 854 && pointer.x <= 906 && pointer.y >= 144 && pointer.y <= 205) {
+        // 特定の場所までドラッグしたら移動
+        item.x = 551;
+        item.y = 31.5;//142.5
+        this.item.Hand[this.item.Hand.length] = item;
+        
+    } else if(pointer.x >= 912 && pointer.x <= 965 && pointer.y >= 144 && pointer.y <= 204){
+        // 特定の場所までドラッグしたら移動
+        item.x = 609;
+        item.y = 31.5;
+        this.item.Hand[this.item.Hand.length] = item;
+    } else if(pointer.x >= 972 && pointer.x <= 1022 && pointer.y >= 144 && pointer.y <= 204){
+        // 特定の場所までドラッグしたら移動
+        item.x = 665;
+        item.y = 31.5;
+        this.item.Hand[this.item.Hand.length] = item;
+    } else if(pointer.x >= 1030 && pointer.x <= 1083 && pointer.y >= 144 && pointer.y <= 204){
+        // 特定の場所までドラッグしたら移動
+        item.x = 725;
+        item.y = 31.5;
+        this.item.Hand[this.item.Hand.length] = item;
+    } else if(pointer.x >= 1088 && pointer.x <= 1141 && pointer.y >= 144 && pointer.y <= 204){
+        // 特定の場所までドラッグしたら移動
+        item.x = 785;
+        item.y = 31.5;
+        this.item.Hand[this.item.Hand.length] = item;
+    } else {
+        // それ以外はスタート位置に戻す
+        item.x = item.originalPositionX;
+        item.y = item.originalPositionY;
+    }
+
+}

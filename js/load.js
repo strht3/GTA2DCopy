@@ -26,9 +26,26 @@ loadScene.preload = function() {
         frameWidth:1935,
         frameHeight:1935,
     });
+    this.load.spritesheet("Explosion", "assets/images/Explosion.png", {
+        frameWidth:480,
+        frameHeight:384,
+    });
+    this.load.spritesheet("KnifeSlash", "assets/images/knifeslash.png", {
+        frameWidth:1080,
+        frameHeight:1080,
+    });
+    this.load.spritesheet("KatanaSlash", "assets/images/katanaSlash.png", {
+        frameWidth:200,
+        frameHeight:159,
+    });
+    this.load.spritesheet("machinegun", "assets/images/Bullets.png", {
+        frameWidth:1800,
+        frameHeight:3900,
+    });
     
     //Attacks Load
     this.load.image('fireball', "assets/images/波動拳.png");
+    this.load.image('bullet', "assets/images/bulllet.png");
     
     //Items Load
     this.load.image('Bat', "assets/images/Bat.png");

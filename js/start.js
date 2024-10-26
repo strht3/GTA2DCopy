@@ -17,7 +17,9 @@ startScene.create = function () {
     //プレイヤーの体力、スタミナ設定
     var datamoney = parseInt(localStorage.getItem('money')) || 0;
     this.PlayerMoney = datamoney;
-    if(localStorage.getItem('items') === 'undefined'){
+    console.log(localStorage.getItem('items'))
+    //if(localStorage.getItem('items') === null){
+    if(!localStorage.getItem('items')){
         this.item = {};
         this.item.Bag = [
         ];
