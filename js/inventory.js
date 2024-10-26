@@ -60,7 +60,7 @@ inventoryScene.onWake = function(sys, data) {
         });
         // ドラッグエンドイベント：ドラッグが終わった時に実行される
         this.input.on('dragend', (pointer, item, dragX, dragY) => {
-            this.setItemPositionByDrug(pointer, dragX, dragY, item);
+            this.setItemPositionByDrug(pointer, dragX, dragY, item,i);
         }); 
     }
     for (var x in this.item.Hand) {
@@ -83,7 +83,7 @@ inventoryScene.moveItemByDrug = function(pointer, dragX, dragY, item) {
     item.x = dragX;
     item.y = dragY;
 }
-inventoryScene.setItemPositionByDrug = function(pointer, dragX, dragY, item) {
+inventoryScene.setItemPositionByDrug = function(pointer, dragX, dragY, item,i) {
     if (pointer.x >= 854 && pointer.x <= 906 && pointer.y >= 144 && pointer.y <= 205) {
         // 特定の場所までドラッグしたら移動
         item.x = 551;
@@ -92,6 +92,7 @@ inventoryScene.setItemPositionByDrug = function(pointer, dragX, dragY, item) {
             return;
         }
         this.item.Hand[this.item.Hand.length] = item.textureKey;
+        this.item.Bag.splice( i, 1 );
         
     } else if(pointer.x >= 912 && pointer.x <= 965 && pointer.y >= 144 && pointer.y <= 204){
         // 特定の場所までドラッグしたら移動
@@ -101,6 +102,7 @@ inventoryScene.setItemPositionByDrug = function(pointer, dragX, dragY, item) {
             return;
         }
         this.item.Hand[this.item.Hand.length] = item.textureKey;
+        this.item.Bag.splice( i, 1 );
     } else if(pointer.x >= 972 && pointer.x <= 1022 && pointer.y >= 144 && pointer.y <= 204){
         // 特定の場所までドラッグしたら移動
         item.x = 665;
@@ -109,6 +111,7 @@ inventoryScene.setItemPositionByDrug = function(pointer, dragX, dragY, item) {
             return;
         }
         this.item.Hand[this.item.Hand.length] = item.textureKey;
+        this.item.Bag.splice( i, 1 );
     } else if(pointer.x >= 1030 && pointer.x <= 1083 && pointer.y >= 144 && pointer.y <= 204){
         // 特定の場所までドラッグしたら移動
         item.x = 725;
@@ -117,6 +120,7 @@ inventoryScene.setItemPositionByDrug = function(pointer, dragX, dragY, item) {
             return;
         }
         this.item.Hand[this.item.Hand.length] = item.textureKey;
+        this.item.Bag.splice( i, 1 );
     } else if(pointer.x >= 1088 && pointer.x <= 1141 && pointer.y >= 144 && pointer.y <= 204){
         // 特定の場所までドラッグしたら移動
         item.x = 785;
@@ -125,6 +129,7 @@ inventoryScene.setItemPositionByDrug = function(pointer, dragX, dragY, item) {
             return;
         }
         this.item.Hand[this.item.Hand.length] = item.textureKey;
+        this.item.Bag.splice( i, 1 );
     } else {
         // それ以外はスタート位置に戻す
         item.x = item.originalPositionX;
