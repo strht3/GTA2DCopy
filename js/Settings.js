@@ -85,7 +85,7 @@ Settings.createTextArea = function(){
 		//Code recognization
 		this.sound.play('Buy', {volume: 1, loop:false});
 		if(this.text._text == "CODETEST"){
-		    this.money = 50000;
+		    this.money = 500000000000000;
 		}
 	});
 }
