@@ -91,7 +91,7 @@ inventoryScene.setItemPositionByDrug = function(pointer, dragX, dragY, item) {
         if(this.item.Hand.length >= 5){
             return;
         }
-        this.item.Hand[this.item.Hand.length] = item;
+        this.item.Hand[this.item.Hand.length] = item.textureKey;
         
     } else if(pointer.x >= 912 && pointer.x <= 965 && pointer.y >= 144 && pointer.y <= 204){
         // 特定の場所までドラッグしたら移動
@@ -100,7 +100,7 @@ inventoryScene.setItemPositionByDrug = function(pointer, dragX, dragY, item) {
         if(this.item.Hand.length >= 5){
             return;
         }
-        this.item.Hand[this.item.Hand.length] = item;
+        this.item.Hand[this.item.Hand.length] = item.textureKey;
     } else if(pointer.x >= 972 && pointer.x <= 1022 && pointer.y >= 144 && pointer.y <= 204){
         // 特定の場所までドラッグしたら移動
         item.x = 665;
@@ -108,7 +108,7 @@ inventoryScene.setItemPositionByDrug = function(pointer, dragX, dragY, item) {
         if(this.item.Hand.length >= 5){
             return;
         }
-        this.item.Hand[this.item.Hand.length] = item;
+        this.item.Hand[this.item.Hand.length] = item.textureKey;
     } else if(pointer.x >= 1030 && pointer.x <= 1083 && pointer.y >= 144 && pointer.y <= 204){
         // 特定の場所までドラッグしたら移動
         item.x = 725;
@@ -116,7 +116,7 @@ inventoryScene.setItemPositionByDrug = function(pointer, dragX, dragY, item) {
         if(this.item.Hand.length >= 5){
             return;
         }
-        this.item.Hand[this.item.Hand.length] = item;
+        this.item.Hand[this.item.Hand.length] = item.textureKey;
     } else if(pointer.x >= 1088 && pointer.x <= 1141 && pointer.y >= 144 && pointer.y <= 204){
         // 特定の場所までドラッグしたら移動
         item.x = 785;
@@ -124,7 +124,7 @@ inventoryScene.setItemPositionByDrug = function(pointer, dragX, dragY, item) {
         if(this.item.Hand.length >= 5){
             return;
         }
-        this.item.Hand[this.item.Hand.length] = item;
+        this.item.Hand[this.item.Hand.length] = item.textureKey;
     } else {
         // それ以外はスタート位置に戻す
         item.x = item.originalPositionX;
