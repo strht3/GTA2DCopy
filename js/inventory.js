@@ -97,7 +97,7 @@ inventoryScene.setItemPositionByDrug = function(pointer, dragX, dragY, item,i) {
         //inventoryScene.item.Hand[this.item.Hand.length] = item.texture.key;
         inventoryScene.item.Hand.push(item.texture.key);
         inventoryScene.item.Bag.splice( item.Num, 1 );
-        
+        localStorage.setItem('items',JSON.stringify(this.item));
     } else if(pointer.x >= 912 && pointer.x <= 965 && pointer.y >= 144 && pointer.y <= 204){
         // 特定の場所までドラッグしたら移動
         item.x = 609;
@@ -107,6 +107,7 @@ inventoryScene.setItemPositionByDrug = function(pointer, dragX, dragY, item,i) {
         }
         inventoryScene.item.Hand.push(item.texture.key)
         inventoryScene.item.Bag.splice( item.Num, 1 );
+        localStorage.setItem('items',JSON.stringify(this.item));
     } else if(pointer.x >= 972 && pointer.x <= 1022 && pointer.y >= 144 && pointer.y <= 204){
         // 特定の場所までドラッグしたら移動
         item.x = 665;
@@ -116,6 +117,7 @@ inventoryScene.setItemPositionByDrug = function(pointer, dragX, dragY, item,i) {
         }
         inventoryScene.item.Hand.push(item.texture.key)
         inventoryScene.item.Bag.splice( item.Num, 1 );
+        localStorage.setItem('items',JSON.stringify(this.item));
     } else if(pointer.x >= 1030 && pointer.x <= 1083 && pointer.y >= 144 && pointer.y <= 204){
         // 特定の場所までドラッグしたら移動
         item.x = 725;
@@ -125,6 +127,7 @@ inventoryScene.setItemPositionByDrug = function(pointer, dragX, dragY, item,i) {
         }
         inventoryScene.item.Hand.push(item.texture.key)
         inventoryScene.item.Bag.splice( item.Num, 1 );
+        localStorage.setItem('items',JSON.stringify(this.item));
     } else if(pointer.x >= 1088 && pointer.x <= 1141 && pointer.y >= 144 && pointer.y <= 204){
         // 特定の場所までドラッグしたら移動
         item.x = 785;
@@ -134,10 +137,10 @@ inventoryScene.setItemPositionByDrug = function(pointer, dragX, dragY, item,i) {
         }
         inventoryScene.item.Hand.push(item.texture.key)
         inventoryScene.item.Bag.splice( item.Num, 1 );
+        localStorage.setItem('items',JSON.stringify(this.item));
     } else {
         // それ以外はスタート位置に戻す
         item.x = item.originalPositionX;
         item.y = item.originalPositionY;
     }
-    localStorage.setItem('items',JSON.stringify(this.item));
 }
