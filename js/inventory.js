@@ -12,12 +12,9 @@ inventoryScene.create = function (data) {
     this.events.on("wake", this.onWake, this);
     this.input.on('pointerdown', this.onPointerDown, this);
     //inventory images
-    var inventoryImage = this.add.image(400,300,'inventory');
     this.item = data.item
     console.log(this.item);
     this.money = data.money
-    inventoryImage.displayWidth = 800;
-    inventoryImage.displayHeight = 600;
 };
 inventoryScene.update = function() {
 };
