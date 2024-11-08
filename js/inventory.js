@@ -57,6 +57,14 @@ inventoryScene.onWake = function(sys, data) {
         item.originalPositionY = item.y;
         item.setInteractive({ draggable: true });
         item.PlaceNum = i;
+        
+        // イベントを1回だけにしても、複数回ドラッグエンドイベントが呼ばれることがあったため、
+        // 同じアイテムは一度しか呼ばないようにisSetでHandにセットしたかどうかを管理
+        item.isSet = false;
+        
+        /* イベントは、1回セットするだけで有効だったため、for文の外に出しました。
+           これのせいでドラッグした後に、何回もアイテムが消えたりしていたようです
+        
         // ドラッグイベント：ドラッグをした時に実行される
         this.input.on('drag', (pointer, item, dragX, dragY) => {
             this.moveItemByDrug(pointer, dragX, dragY, item);
@@ -64,8 +72,18 @@ inventoryScene.onWake = function(sys, data) {
         // ドラッグエンドイベント：ドラッグが終わった時に実行される
         this.input.on('dragend', (pointer, item, dragX, dragY) => {
             this.setItemPositionByDrug(pointer, dragX, dragY, item,i);
-        }); 
+        });
+        */
     }
+    // ドラッグイベント：ドラッグをした時に実行される
+    this.input.on('drag', (pointer, item, dragX, dragY) => {
+        this.moveItemByDrug(pointer, dragX, dragY, item);
+    });
+    // ドラッグエンドイベント：ドラッグが終わった時に実行される
+    this.input.on('dragend', (pointer, item, dragX, dragY) => {
+        this.setItemPositionByDrug(pointer, dragX, dragY, item);
+    }); 
+    
     for (var x in this.item.Hand) {
         //calculation of position of items + Placing images
         var itemX = 535 + 59 * (x % 10);
@@ -95,9 +113,15 @@ inventoryScene.setItemPositionByDrug = function(pointer, dragX, dragY, item,i) {
             return;
         }
         //inventoryScene.item.Hand[this.item.Hand.length] = item.texture.key;
-        inventoryScene.item.Hand.push(item.texture.key)
-        inventoryScene.item.Bag.splice( item.PlaceNum, 1 );
-        localStorage.setItem('items',JSON.stringify(this.item));
+        
+        // アイテムがHandに未セットの時だけアイテムの移動を行う
+        if (!item.isSet) {
+            // 一度Handにセットしたら、isSetをtrueに変更
+            item.isSet = true;
+            inventoryScene.item.Hand.push(item.texture.key)
+            inventoryScene.item.Bag.splice( item.PlaceNum, 1 );
+            localStorage.setItem('items',JSON.stringify(this.item));
+        }
     } else if(pointer.x >= 912 && pointer.x <= 965 && pointer.y >= 144 && pointer.y <= 204){
         // 特定の場所までドラッグしたら移動
         item.x = 609;
@@ -105,9 +129,15 @@ inventoryScene.setItemPositionByDrug = function(pointer, dragX, dragY, item,i) {
         if(inventoryScene.item.Hand.length >= 5){
             return;
         }
-        inventoryScene.item.Hand.push(item.texture.key)
-        inventoryScene.item.Bag.splice( item.PlaceNum, 1 );
-        localStorage.setItem('items',JSON.stringify(this.item));
+        
+        // アイテムがHandに未セットの時だけアイテムの移動を行う
+        if (!item.isSet) {
+            // 一度Handにセットしたら、isSetをtrueに変更
+            item.isSet = true;
+            inventoryScene.item.Hand.push(item.texture.key)
+            inventoryScene.item.Bag.splice( item.PlaceNum, 1 );
+            localStorage.setItem('items',JSON.stringify(this.item));
+        }
     } else if(pointer.x >= 972 && pointer.x <= 1022 && pointer.y >= 144 && pointer.y <= 204){
         // 特定の場所までドラッグしたら移動
         item.x = 665;
@@ -115,9 +145,15 @@ inventoryScene.setItemPositionByDrug = function(pointer, dragX, dragY, item,i) {
         if(inventoryScene.item.Hand.length >= 5){
             return;
         }
-        inventoryScene.item.Hand.push(item.texture.key)
-        inventoryScene.item.Bag.splice( item.PlaceNum, 1 );
-        localStorage.setItem('items',JSON.stringify(this.item));
+        
+        // アイテムがHandに未セットの時だけアイテムの移動を行う
+        if (!item.isSet) {
+            // 一度Handにセットしたら、isSetをtrueに変更
+            item.isSet = true;
+            inventoryScene.item.Hand.push(item.texture.key)
+            inventoryScene.item.Bag.splice( item.PlaceNum, 1 );
+            localStorage.setItem('items',JSON.stringify(this.item));
+        }
     } else if(pointer.x >= 1030 && pointer.x <= 1083 && pointer.y >= 144 && pointer.y <= 204){
         // 特定の場所までドラッグしたら移動
         item.x = 725;
@@ -125,9 +161,15 @@ inventoryScene.setItemPositionByDrug = function(pointer, dragX, dragY, item,i) {
         if(inventoryScene.item.Hand.length >= 5){
             return;
         }
-        inventoryScene.item.Hand.push(item.texture.key)
-        inventoryScene.item.Bag.splice( item.PlaceNum, 1 );
-        localStorage.setItem('items',JSON.stringify(this.item));
+        
+        // アイテムがHandに未セットの時だけアイテムの移動を行う
+        if (!item.isSet) {
+            // 一度Handにセットしたら、isSetをtrueに変更
+            item.isSet = true;
+            inventoryScene.item.Hand.push(item.texture.key)
+            inventoryScene.item.Bag.splice( item.PlaceNum, 1 );
+            localStorage.setItem('items',JSON.stringify(this.item));
+        }
     } else if(pointer.x >= 1088 && pointer.x <= 1141 && pointer.y >= 144 && pointer.y <= 204){
         // 特定の場所までドラッグしたら移動
         item.x = 785;
@@ -135,9 +177,15 @@ inventoryScene.setItemPositionByDrug = function(pointer, dragX, dragY, item,i) {
         if(inventoryScene.item.Hand.length >= 5){
             return;
         }
-        inventoryScene.item.Hand.push(item.texture.key)
-        inventoryScene.item.Bag.splice( item.PlaceNum, 1 );
-        localStorage.setItem('items',JSON.stringify(this.item));
+        
+        // アイテムがHandに未セットの時だけアイテムの移動を行う
+        if (!item.isSet) {
+            // 一度Handにセットしたら、isSetをtrueに変更
+            item.isSet = true;
+            inventoryScene.item.Hand.push(item.texture.key)
+            inventoryScene.item.Bag.splice( item.PlaceNum, 1 );
+            localStorage.setItem('items',JSON.stringify(this.item));
+        }
     } else {
         // それ以外はスタート位置に戻す
         item.x = item.originalPositionX;
