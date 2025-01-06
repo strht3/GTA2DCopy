@@ -13,13 +13,11 @@ inventoryScene.create = function (data) {
     this.input.on('pointerdown', this.onPointerDown, this);
     //inventory images
     this.item = data.item
-    console.log(this.item);
     this.money = data.money
 };
 inventoryScene.update = function() {
 };
 inventoryScene.onPointerDown = function(pointer , over) {
-    console.log(pointer.x + " " + pointer.y)
     //if clicked outside the box, close scene + send all datas
     if(!(pointer.position.x > 330 && pointer.position.x < 1130 && pointer.position.y > 142.5 && pointer.position.y < 742.5)){
         this.scene.sleep("Inventory");
