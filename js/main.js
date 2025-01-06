@@ -695,30 +695,35 @@ mainScene.punchBeam = function(direction){
             return;
         }
         attacktype = this.item.Hand[0]
+        console.log(attacktype);
     }else if(this.keys.key2.isDown){
         if(this.item.Hand[1] == null){
             attacktype = 'fireball';
             return;
         }
         attacktype = this.item.Hand[1]
+        console.log(attacktype);
     }else if(this.keys.key3.isDown){
         if(this.item.Hand[2] == null){
             attacktype = 'fireball';
             return;
         }
         attacktype = this.item.Hand[2]
+        console.log(attacktype);
     }else if(this.keys.key4.isDown){
         if(this.item.Hand[3] == null){
             attacktype = 'fireball';
             return;
         }
         attacktype = this.item.Hand[3]
+        console.log(attacktype);
     }else if(this.keys.key5.isDown){
         if(this.item.Hand[4] == null){
             attacktype = 'fireball';
             return;
         }
         attacktype = this.item.Hand[4]
+        console.log(attacktype);
     }
     var posX = this.player.x;
     var posY = this.player.y;
