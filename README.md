@@ -32,3 +32,22 @@ Game is not compleated. WIP.
 Using HTML5, Phaser, and Javascript. Map textures came from [Kenney.nl](https://kenney.nl/assets/roguelike-modern-city), edited in [Tiled](https://www.mapeditor.org/)(app). Other Animations(Player,Enemy,Car...etc) made in [pixilart](https://www.pixilart.com/draw#).
 
 I hope you will enjoy :)
+
+## Instructions for editing
+file "assets" includes every assets in games.
+
+Go inside a file "js" to see all codes. 
+main.js includes a base structure of entire game.
+load.js loads every single assets and files into game
+start.js is a for start page codes.
+shop.js, inventory.js, Settings.js is for each pages that are possible in game.
+
+Go inside file"assets", go to "data", and you will see a map data.
+
+If you want to edit, first make sure to read throgh main.js simply.(not deep! take it easy) 
+image loading is easier if you put all images into assets/image folder, since you can just copy loading codes in load.js. This is same in audios too.
+
+index.html is a html code of entire web page! do not touch this that much or else it might change entire game.
+
+As you might know, javascript codes are really long. But if you read throgh it, it is easier than you think. Take it easy!
+
