@@ -40,10 +40,11 @@ mainScene.create = function (data) {
 };
 mainScene.update = function() {
     //move player if it is showed
-    if(this.player.active == true){
+    if(this.player.active === true){
         this.moveplayer();
     }
     this.healPlayerHealthBySecond();
+    this.itemchange();
 };
 
 
@@ -588,6 +589,45 @@ mainScene.MoveEnemy = function(enemy){
         return;
     }
 };
+mainScene.itemchange = function(){
+    this.attacktype = 'fireball';
+    if(this.keys.key1.isDown){
+        if(this.item.Hand[0] == null){
+            this.attacktype = 'fireball';
+            return;
+        }
+        this.attacktype = this.item.Hand[0]
+        console.log(this.attacktype);
+    }else if(this.keys.key2.isDown){
+        if(this.item.Hand[1] == null){
+            this.attacktype = 'fireball';
+            return;
+        }
+        this.attacktype = this.item.Hand[1]
+        console.log(this.attacktype);
+    }else if(this.keys.key3.isDown){
+        if(this.item.Hand[2] == null){
+            this.attacktype = 'fireball';
+            return;
+        }
+        this.attacktype = this.item.Hand[2]
+        console.log(this.attacktype);
+    }else if(this.keys.key4.isDown){
+        if(this.item.Hand[3] == null){
+            this.attacktype = 'fireball';
+            return;
+        }
+        this.attacktype = this.item.Hand[3]
+        console.log(this.attacktype);
+    }else if(this.keys.key5.isDown){
+        if(this.item.Hand[4] == null){
+            this.attacktype = 'fireball';
+            return;
+        }
+        this.attacktype = this.item.Hand[4]
+        console.log(this.attacktype);
+    }
+}
 mainScene.enemySetPunchFalse = function(enemy){
     this.enemyPunching = false;
 };
@@ -688,47 +728,10 @@ mainScene.createPunchGroup = function(){
     this.physics.add.collider(this.PunchGroup,this.borderLayer,this.punchHitWall,null,this);
 }
 mainScene.punchBeam = function(direction){
-    var attacktype = 'fireball';
-    if(this.keys.key1.isDown){
-        if(this.item.Hand[0] == null){
-            attacktype = 'fireball';
-            return;
-        }
-        attacktype = this.item.Hand[0]
-        console.log(attacktype);
-    }else if(this.keys.key2.isDown){
-        if(this.item.Hand[1] == null){
-            attacktype = 'fireball';
-            return;
-        }
-        attacktype = this.item.Hand[1]
-        console.log(attacktype);
-    }else if(this.keys.key3.isDown){
-        if(this.item.Hand[2] == null){
-            attacktype = 'fireball';
-            return;
-        }
-        attacktype = this.item.Hand[2]
-        console.log(attacktype);
-    }else if(this.keys.key4.isDown){
-        if(this.item.Hand[3] == null){
-            attacktype = 'fireball';
-            return;
-        }
-        attacktype = this.item.Hand[3]
-        console.log(attacktype);
-    }else if(this.keys.key5.isDown){
-        if(this.item.Hand[4] == null){
-            attacktype = 'fireball';
-            return;
-        }
-        attacktype = this.item.Hand[4]
-        console.log(attacktype);
-    }
     var posX = this.player.x;
     var posY = this.player.y;
-    var punch = this.PunchGroup.create(posX,posY,attacktype);
-    if(attacktype == 'fireball' || attacktype == 'Glock17'){
+    var punch = this.PunchGroup.create(posX,posY,this.attacktype);
+    if(this.attacktype == 'fireball' || this.attacktype == 'Glock17'){
         if(direction == 'right'){
             punch.setAngle(90);
             punch.setVelocityX(300);
