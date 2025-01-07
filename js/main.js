@@ -590,7 +590,6 @@ mainScene.MoveEnemy = function(enemy){
     }
 };
 mainScene.itemchange = function(){
-    console.log("itemchange checking...")
     this.attacktype = 'fireball';
     if(this.keys.key1.isDown){
         if(this.item.Hand[0] == null){
