@@ -688,6 +688,7 @@ mainScene.createPunchGroup = function(){
     this.physics.add.collider(this.PunchGroup,this.borderLayer,this.punchHitWall,null,this);
 }
 mainScene.punchBeam = function(direction){
+    console.log("test")
     var attacktype = 'fireball';
     if(this.keys.key1.isDown){
         if(this.item.Hand[0] == null){
