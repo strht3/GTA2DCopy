@@ -731,7 +731,10 @@ mainScene.punchBeam = function(direction){
     var posX = this.player.x;
     var posY = this.player.y;
     var punch = this.PunchGroup.create(posX,posY,this.attacktype);
-    if(this.attacktype == 'fireball' || this.attacktype == 'Glock17'){
+    if(!this.attacktype === 'fireball'){
+        console.log('checked: compleately not fireball');
+    }
+    if(this.attacktype === 'fireball'){
         if(direction == 'right'){
             punch.setAngle(90);
             punch.setVelocityX(300);
