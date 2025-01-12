@@ -590,7 +590,6 @@ mainScene.MoveEnemy = function(enemy){
     }
 };
 mainScene.itemchange = function(){
-    this.attacktype = 'fireball';
     if(this.keys.key1.isDown){
         if(this.item.Hand[0] == null){
             this.attacktype = 'fireball';
@@ -728,12 +727,11 @@ mainScene.createPunchGroup = function(){
     this.physics.add.collider(this.PunchGroup,this.borderLayer,this.punchHitWall,null,this);
 }
 mainScene.punchBeam = function(direction){
+    console.log(this.item.Hand);
+    console.log('Attack type: ', this.attacktype);
     var posX = this.player.x;
     var posY = this.player.y;
-    var punch = this.PunchGroup.create(posX,posY,this.attacktype);
-    if(!this.attacktype === 'fireball'){
-        console.log('checked: compleately not fireball');
-    }
+    var punch = this.PunchGroup.create(posX, posY, this.attacktype);
     if(this.attacktype === 'fireball'){
         if(direction == 'right'){
             punch.setAngle(90);
