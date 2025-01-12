@@ -596,35 +596,30 @@ mainScene.itemchange = function(){
             return;
         }
         this.attacktype = this.item.Hand[0]
-        console.log(this.attacktype);
     }else if(this.keys.key2.isDown){
         if(this.item.Hand[1] == null){
             this.attacktype = 'fireball';
             return;
         }
         this.attacktype = this.item.Hand[1]
-        console.log(this.attacktype);
     }else if(this.keys.key3.isDown){
         if(this.item.Hand[2] == null){
             this.attacktype = 'fireball';
             return;
         }
         this.attacktype = this.item.Hand[2]
-        console.log(this.attacktype);
     }else if(this.keys.key4.isDown){
         if(this.item.Hand[3] == null){
             this.attacktype = 'fireball';
             return;
         }
         this.attacktype = this.item.Hand[3]
-        console.log(this.attacktype);
     }else if(this.keys.key5.isDown){
         if(this.item.Hand[4] == null){
             this.attacktype = 'fireball';
             return;
         }
         this.attacktype = this.item.Hand[4]
-        console.log(this.attacktype);
     }
 }
 mainScene.enemySetPunchFalse = function(enemy){
@@ -727,8 +722,6 @@ mainScene.createPunchGroup = function(){
     this.physics.add.collider(this.PunchGroup,this.borderLayer,this.punchHitWall,null,this);
 }
 mainScene.punchBeam = function(direction){
-    console.log(this.item.Hand);
-    console.log('Attack type: ', this.attacktype);
     var posX = this.player.x;
     var posY = this.player.y;
     var punch = this.PunchGroup.create(posX, posY, this.attacktype);
