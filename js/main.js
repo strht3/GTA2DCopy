@@ -810,7 +810,7 @@ mainScene.punchBeam = function(direction){
             punch.setAngle(0);
         }
     }else if(this.attacktype === 'bullet'){
-        punch.setDisplaySize(5,5);
+        punch.setDisplaySize(15,15);
         if(direction == 'right'){
             punch.setAngle(90);
             punch.setVelocityX(600);
