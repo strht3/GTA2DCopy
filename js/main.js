@@ -594,32 +594,72 @@ mainScene.itemchange = function(){
         if(this.item.Hand[0] == null){
             this.attacktype = 'fireball';
             return;
+        }else if(this.item.Hand[0] == 'Knife'){
+            var subattack = 'KnifeSlash';
+        }else if(this.item.Hand[0] == 'CheapSword'){
+            var subattack = 'KatanaSlash';
+        }else if(this.item.Hand[0] == 'Glock17'){
+            var subattack = 'bullet';
+        }else if(this.item.Hand[0] == 'MAC11' || this.item.Hand[0] == 'G36K'){
+            var subattack = 'machinegun';
         }
-        this.attacktype = this.item.Hand[0]
+        this.attacktype = subattack;
     }else if(this.keys.key2.isDown){
         if(this.item.Hand[1] == null){
             this.attacktype = 'fireball';
             return;
+        }else if(this.item.Hand[1] == 'Knife'){
+            var subattack = 'KnifeSlash';
+        }else if(this.item.Hand[1] == 'CheapSword'){
+            var subattack = 'KatanaSlash';
+        }else if(this.item.Hand[1] == 'Glock17'){
+            var subattack = 'bullet';
+        }else if(this.item.Hand[1] == 'MAC11' || this.item.Hand[1] == 'G36K'){
+            var subattack = 'machinegun';
         }
-        this.attacktype = this.item.Hand[1]
+        this.attacktype = subattack;
     }else if(this.keys.key3.isDown){
         if(this.item.Hand[2] == null){
             this.attacktype = 'fireball';
             return;
+        }else if(this.item.Hand[2] == 'Knife'){
+            var subattack = 'KnifeSlash';
+        }else if(this.item.Hand[2] == 'CheapSword'){
+            var subattack = 'KatanaSlash';
+        }else if(this.item.Hand[2] == 'Glock17'){
+            var subattack = 'bullet';
+        }else if(this.item.Hand[2] == 'MAC11' || this.item.Hand[2] == 'G36K'){
+            var subattack = 'machinegun';
         }
-        this.attacktype = this.item.Hand[2]
+        this.attacktype = subattack;
     }else if(this.keys.key4.isDown){
         if(this.item.Hand[3] == null){
             this.attacktype = 'fireball';
             return;
+        }else if(this.item.Hand[3] == 'Knife'){
+            var subattack = 'KnifeSlash';
+        }else if(this.item.Hand[3] == 'CheapSword'){
+            var subattack = 'KatanaSlash';
+        }else if(this.item.Hand[3] == 'Glock17'){
+            var subattack = 'bullet';
+        }else if(this.item.Hand[3] == 'MAC11' || this.item.Hand[3] == 'G36K'){
+            var subattack = 'machinegun';
         }
-        this.attacktype = this.item.Hand[3]
+        this.attacktype = subattack;
     }else if(this.keys.key5.isDown){
         if(this.item.Hand[4] == null){
             this.attacktype = 'fireball';
             return;
+        }else if(this.item.Hand[4] == 'Knife'){
+            var subattack = 'KnifeSlash';
+        }else if(this.item.Hand[4] == 'CheapSword'){
+            var subattack = 'KatanaSlash';
+        }else if(this.item.Hand[4] == 'Glock17'){
+            var subattack = 'bullet';
+        }else if(this.item.Hand[4] == 'MAC11' || this.item.Hand[4] == 'G36K'){
+            var subattack = 'machinegun';
         }
-        this.attacktype = this.item.Hand[4]
+        this.attacktype = subattack;
     }
 }
 mainScene.enemySetPunchFalse = function(enemy){
@@ -739,7 +779,51 @@ mainScene.punchBeam = function(direction){
             punch.setAngle(0);
             punch.setVelocityY(-300);
         }
-    }else {
+    }else if(this.attacktype === 'Bat'){
+        if(direction == 'right'){
+            punch.setAngle(90);
+        }else if(direction == 'left'){
+            punch.setAngle(270);
+        }else if(direction == 'down'){
+            punch.setAngle(180);
+        }else if(direction == 'up'){
+            punch.setAngle(0);
+        }
+    }else if(this.attacktype === 'KnifeSlash'){
+        if(direction == 'right'){
+            punch.setAngle(90);
+        }else if(direction == 'left'){
+            punch.setAngle(270);
+        }else if(direction == 'down'){
+            punch.setAngle(180);
+        }else if(direction == 'up'){
+            punch.setAngle(0);
+        }
+    }else if(this.attacktype === 'KatanaSlash'){
+        if(direction == 'right'){
+            punch.setAngle(90);
+        }else if(direction == 'left'){
+            punch.setAngle(270);
+        }else if(direction == 'down'){
+            punch.setAngle(180);
+        }else if(direction == 'up'){
+            punch.setAngle(0);
+        }
+    }else if(this.attacktype === 'bullet'){
+        if(direction == 'right'){
+            punch.setAngle(90);
+            punch.setVelocityX(600);
+        }else if(direction == 'left'){
+            punch.setAngle(270);
+            punch.setVelocityX(-600);
+        }else if(direction == 'down'){
+            punch.setAngle(180);
+            punch.setVelocityY(600)
+        }else if(direction == 'up'){
+            punch.setAngle(0);
+            punch.setVelocityY(-600);
+        }
+    }else if(this.attacktype === 'machinegun'){
         if(direction == 'right'){
             punch.setAngle(90);
         }else if(direction == 'left'){
@@ -750,6 +834,7 @@ mainScene.punchBeam = function(direction){
             punch.setAngle(0);
         }
     }
+
     
     this.punchcooldown = this.time.addEvent({
         delay:500,
