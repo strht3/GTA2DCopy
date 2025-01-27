@@ -768,25 +768,25 @@ mainScene.createAttackAnimation = function(){
         key: 'KatanaSlash',
         frames: this.anims.generateFrameNumbers('KatanaSlash', { start: 0, end: 3 }),
         frameRate: 10,
-        repeat: -1
+        repeat: 0
     });
     this.anims.create({
         key: 'KnifeSlash',
         frames: this.anims.generateFrameNumbers('KnifeSlash', { start: 0, end: 7 }),
         frameRate: 10,
-        repeat: -1
+        repeat: 0
     });
     this.anims.create({
         key: 'Explosion',
         frames: this.anims.generateFrameNumbers('Explosion', { start: 0, end: 5 }),
         frameRate: 10,
-        repeat: -1
+        repeat: 0
     });
     this.anims.create({
         key: 'machinegun',
         frames: this.anims.generateFrameNumbers('machinegun', { start: 0, end: 1 }),
         frameRate: 10,
-        repeat: -1
+        repeat: 0
     });
 }
 mainScene.punchBeam = function(direction){
