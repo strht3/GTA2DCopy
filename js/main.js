@@ -877,6 +877,7 @@ mainScene.punchBeam = function(direction){
             punch.setVelocityY(-600);
         }
     }else if(this.attacktype === 'machinegun'){
+        punch.setDisplaySize(375,375);
         if(direction == 'right'){
             punch.setAngle(90);
             punch.anims.play('machinegun',true);
