@@ -760,7 +760,7 @@ mainScene.createPunchGroup = function(){
     this.physics.add.overlap(this.enemyGroup,this.PunchGroup,this.PlayerAttack,null,this);
     this.physics.add.collider(this.PunchGroup,this.worldLayer,this.punchHitWall,null,this);
     this.physics.add.collider(this.PunchGroup,this.borderLayer,this.punchHitWall,null,this);
-    this.createAttackAnimation(punch);
+    this.createAttackAnimation();
 }
 mainScene.punchBeam = function(direction){
     var posX = this.player.x;
