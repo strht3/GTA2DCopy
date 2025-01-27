@@ -756,11 +756,38 @@ mainScene.createAttackAnimation = function(){
     });
 }
 mainScene.createPunchGroup = function(){
+    this.createAttackAnimation();
     this.PunchGroup = this.physics.add.group();
     this.physics.add.overlap(this.enemyGroup,this.PunchGroup,this.PlayerAttack,null,this);
     this.physics.add.collider(this.PunchGroup,this.worldLayer,this.punchHitWall,null,this);
     this.physics.add.collider(this.PunchGroup,this.borderLayer,this.punchHitWall,null,this);
-    this.createAttackAnimation();
+}
+mainScene.createAttackAnimation = function(){
+    console.log("creating animations for attacks")
+    this.anims.create({
+        key: 'KatanaSlash',
+        frames: this.anims.generateFrameNumbers('KatanaSlash', { start: 0, end: 3 }),
+        frameRate: 10,
+        repeat: -1
+    });
+    this.anims.create({
+        key: 'KnifeSlash',
+        frames: this.anims.generateFrameNumbers('KnifeSlash', { start: 0, end: 7 }),
+        frameRate: 10,
+        repeat: -1
+    });
+    this.anims.create({
+        key: 'Explosion',
+        frames: this.anims.generateFrameNumbers('Explosion', { start: 0, end: 5 }),
+        frameRate: 10,
+        repeat: -1
+    });
+    this.anims.create({
+        key: 'machinegun',
+        frames: this.anims.generateFrameNumbers('machinegun', { start: 0, end: 1 }),
+        frameRate: 10,
+        repeat: -1
+    });
 }
 mainScene.punchBeam = function(direction){
     var posX = this.player.x;
@@ -1076,31 +1103,4 @@ mainScene.setMoney = function(amount, addOrSet){
     localStorage.setItem('items',JSON.stringify(this.item));
     localStorage.setItem('health',this.PlayerHealth);
 
-}
-mainScene.createAttackAnimation = function(){
-    console.log("creating animations for attacks")
-    this.anims.create({
-        key: 'KatanaSlash',
-        frames: this.anims.generateFrameNumbers('KatanaSlash', { start: 0, end: 3 }),
-        frameRate: 10,
-        repeat: -1
-    });
-    this.anims.create({
-        key: 'KnifeSlash',
-        frames: this.anims.generateFrameNumbers('KnifeSlash', { start: 0, end: 7 }),
-        frameRate: 10,
-        repeat: -1
-    });
-    this.anims.create({
-        key: 'Explosion',
-        frames: this.anims.generateFrameNumbers('Explosion', { start: 0, end: 5 }),
-        frameRate: 10,
-        repeat: -1
-    });
-    this.anims.create({
-        key: 'machinegun',
-        frames: this.anims.generateFrameNumbers('machinegun', { start: 0, end: 1 }),
-        frameRate: 10,
-        repeat: -1
-    });
 }
