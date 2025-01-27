@@ -31,8 +31,8 @@ loadScene.preload = function() {
         frameHeight:384,
     });
     this.load.spritesheet("KnifeSlash", "assets/images/knifeslash.png", {
-        frameWidth:1080,
-        frameHeight:1080,
+        frameWidth:43,
+        frameHeight:43,
     });
     this.load.spritesheet("KatanaSlash", "assets/images/katanaSlash.png", {
         frameWidth:200,
