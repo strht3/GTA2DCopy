@@ -825,19 +825,19 @@ mainScene.punchBeam = function(direction){
         punch.setDisplaySize(75,75);
         if(direction == 'right'){
             punch.setAngle(90);
-            punch.x += 20;
+            punch.x += 40;
             punch.anims.play('KnifeSlash',true);
         }else if(direction == 'left'){
             punch.setAngle(270);
-            punch.x -= 20;
+            punch.x -= 40;
             punch.anims.play('KnifeSlash',true);
         }else if(direction == 'down'){
             punch.setAngle(180);
-            punch.y += 20;
+            punch.y += 40;
             punch.anims.play('KnifeSlash',true);
         }else if(direction == 'up'){
             punch.setAngle(0);
-            punch.y -= 20;
+            punch.y -= 40;
             punch.anims.play('KnifeSlash',true);
         }
     }else if(this.attacktype === 'KatanaSlash'){
