@@ -849,16 +849,16 @@ mainScene.punchBeam = function(direction){
         }
     }else if(this.attacktype === 'KatanaSlash'){
         if(direction == 'right'){
-            punch.setAngle(90);
+            punch.setAngle(0);
             punch.anims.play('KatanaSlash',true);
         }else if(direction == 'left'){
-            punch.setAngle(270);
-            punch.anims.play('KatanaSlash',true);
-        }else if(direction == 'down'){
             punch.setAngle(180);
             punch.anims.play('KatanaSlash',true);
+        }else if(direction == 'down'){
+            punch.setAngle(90);
+            punch.anims.play('KatanaSlash',true);
         }else if(direction == 'up'){
-            punch.setAngle(0);
+            punch.setAngle(270);
             punch.anims.play('KatanaSlash',true);
         }
     }else if(this.attacktype === 'bullet'){
