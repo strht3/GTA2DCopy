@@ -1078,6 +1078,7 @@ mainScene.setMoney = function(amount, addOrSet){
 
 }
 mainScene.createAttackAnimation = function(){
+    console.log("creating animations for attacks")
     this.anims.create({
         key: 'KatanaSlash',
         frames: this.anims.generateFrameNumbers('KatanaSlash', { start: 0, end: 3 }),
