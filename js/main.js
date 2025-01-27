@@ -796,6 +796,7 @@ mainScene.punchBeam = function(direction){
     console.log('Playing animation for attack type: ' + this.attacktype);
 
     punch.on('animationcomplete', function(){
+        console.log('animation complete for attack type:',this.attacktype);
         punch.destroy();
     }, this);
     
