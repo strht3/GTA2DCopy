@@ -765,6 +765,7 @@ mainScene.punchBeam = function(direction){
     var posX = this.player.x;
     var posY = this.player.y;
     var punch = this.PunchGroup.create(posX, posY, this.attacktype);
+    this.createAttackAnimation(punch);
     if(this.attacktype === 'fireball'){
         if(direction == 'right'){
             punch.setAngle(90);
@@ -782,32 +783,44 @@ mainScene.punchBeam = function(direction){
     }else if(this.attacktype === 'Bat'){
         if(direction == 'right'){
             punch.setAngle(90);
+            punch.anims.play('explosion',true);
         }else if(direction == 'left'){
             punch.setAngle(270);
+            punch.anims.play('explosion',true);
         }else if(direction == 'down'){
             punch.setAngle(180);
+            punch.anims.play('explosion',true);
         }else if(direction == 'up'){
             punch.setAngle(0);
+            punch.anims.play('explosion',true);
         }
     }else if(this.attacktype === 'KnifeSlash'){
         if(direction == 'right'){
             punch.setAngle(90);
+            punch.anims.play('KnifeSlash',true);
         }else if(direction == 'left'){
             punch.setAngle(270);
+            punch.anims.play('KnifeSlash',true);
         }else if(direction == 'down'){
             punch.setAngle(180);
+            punch.anims.play('KnifeSlash',true);
         }else if(direction == 'up'){
             punch.setAngle(0);
+            punch.anims.play('KnifeSlash',true);
         }
     }else if(this.attacktype === 'KatanaSlash'){
         if(direction == 'right'){
             punch.setAngle(90);
+            punch.anims.play('KatanaSlash',true);
         }else if(direction == 'left'){
             punch.setAngle(270);
+            punch.anims.play('KatanaSlash',true);
         }else if(direction == 'down'){
             punch.setAngle(180);
+            punch.anims.play('KatanaSlash',true);
         }else if(direction == 'up'){
             punch.setAngle(0);
+            punch.anims.play('KatanaSlash',true);
         }
     }else if(this.attacktype === 'bullet'){
         punch.setDisplaySize(15,15);
@@ -827,12 +840,16 @@ mainScene.punchBeam = function(direction){
     }else if(this.attacktype === 'machinegun'){
         if(direction == 'right'){
             punch.setAngle(90);
+            punch.anims.play('machinegun',true);
         }else if(direction == 'left'){
             punch.setAngle(270);
+            punch.anims.play('machinegun',true);
         }else if(direction == 'down'){
             punch.setAngle(180);
+            punch.anims.play('machinegun',true);
         }else if(direction == 'up'){
             punch.setAngle(0);
+            punch.anims.play('machinegun',true);
         }
     }
 
@@ -1059,4 +1076,32 @@ mainScene.setMoney = function(amount, addOrSet){
     localStorage.setItem('items',JSON.stringify(this.item));
     localStorage.setItem('health',this.PlayerHealth);
 
+}
+mainScene.createAttackAnimation = function(punch){
+    // 最初のフレームを0番にする
+    punch.setFrame(0);
+    this.anims.create({
+        key: 'KatanaSlash',
+        frames: this.anims.generateFrameNumbers('KatanaSlash', { start: 0, end: 3 }),
+        frameRate: 10,
+        repeat: -1
+    });
+    this.anims.create({
+        key: 'KnifeSlash',
+        frames: this.anims.generateFrameNumbers('KnifeSlash', { start: 0, end: 7 }),
+        frameRate: 10,
+        repeat: -1
+    });
+    this.anims.create({
+        key: 'Explosion',
+        frames: this.anims.generateFrameNumbers('Explosion', { start: 0, end: 5 }),
+        frameRate: 10,
+        repeat: -1
+    });
+    this.anims.create({
+        key: 'machinegun',
+        frames: this.anims.generateFrameNumbers('machinegun', { start: 0, end: 1 }),
+        frameRate: 10,
+        repeat: -1
+    });
 }
