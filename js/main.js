@@ -795,6 +795,7 @@ mainScene.punchBeam = function(direction){
             punch.anims.play('explosion',true);
         }
     }else if(this.attacktype === 'KnifeSlash'){
+        punch.setDisplaySize(15,15);
         if(direction == 'right'){
             punch.setAngle(90);
             punch.anims.play('KnifeSlash',true);
