@@ -760,12 +760,12 @@ mainScene.createPunchGroup = function(){
     this.physics.add.overlap(this.enemyGroup,this.PunchGroup,this.PlayerAttack,null,this);
     this.physics.add.collider(this.PunchGroup,this.worldLayer,this.punchHitWall,null,this);
     this.physics.add.collider(this.PunchGroup,this.borderLayer,this.punchHitWall,null,this);
+    this.createAttackAnimation(punch);
 }
 mainScene.punchBeam = function(direction){
     var posX = this.player.x;
     var posY = this.player.y;
     var punch = this.PunchGroup.create(posX, posY, this.attacktype);
-    this.createAttackAnimation(punch);
     if(this.attacktype === 'fireball'){
         if(direction == 'right'){
             punch.setAngle(90);
@@ -1077,9 +1077,7 @@ mainScene.setMoney = function(amount, addOrSet){
     localStorage.setItem('health',this.PlayerHealth);
 
 }
-mainScene.createAttackAnimation = function(punch){
-    // 最初のフレームを0番にする
-    punch.setFrame(0);
+mainScene.createAttackAnimation = function(){
     this.anims.create({
         key: 'KatanaSlash',
         frames: this.anims.generateFrameNumbers('KatanaSlash', { start: 0, end: 3 }),
