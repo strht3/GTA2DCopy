@@ -806,22 +806,22 @@ mainScene.punchBeam = function(direction){
         }
     }else if(this.attacktype === 'KnifeSlash'){
         punchdelay = 300;
-        punch.setDisplaySize(75,75);
+        punch.setDisplaySize(150,150);
         if(direction == 'right'){
             punch.setAngle(90);
-            punch.x += 40;
+            punch.x += 75;
             punch.anims.play('KnifeSlash',true);
         }else if(direction == 'left'){
             punch.setAngle(270);
-            punch.x -= 40;
+            punch.x -= 75;
             punch.anims.play('KnifeSlash',true);
         }else if(direction == 'down'){
             punch.setAngle(180);
-            punch.y += 40;
+            punch.y += 75;
             punch.anims.play('KnifeSlash',true);
         }else if(direction == 'up'){
             punch.setAngle(0);
-            punch.y -= 40;
+            punch.y -= 75;
             punch.anims.play('KnifeSlash',true);
         }
     }else if(this.attacktype === 'KatanaSlash'){
