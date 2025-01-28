@@ -767,8 +767,8 @@ mainScene.createAttackAnimation = function(){
     this.anims.create({
         key: 'KatanaSlash',
         frames: this.anims.generateFrameNumbers('KatanaSlash', { start: 0, end: 3 }),
-        frameRate: 10,
-        repeat: 0
+        frameRate: 15,
+        repeat: 2
     });
     this.anims.create({
         key: 'KnifeSlash',
@@ -880,19 +880,19 @@ mainScene.punchBeam = function(direction){
         punch.setDisplaySize(500,500);
         if(direction == 'right'){
             punch.setAngle(90);
-            punch.x += 1000;
+            punch.x += 500;
             punch.anims.play('machinegun',true);
         }else if(direction == 'left'){
             punch.setAngle(270);
-            punch.x -= 1000;
+            punch.x -= 500;
             punch.anims.play('machinegun',true);
         }else if(direction == 'down'){
             punch.setAngle(180);
-            punch.y += 1000;
+            punch.y += 500;
             punch.anims.play('machinegun',true);
         }else if(direction == 'up'){
             punch.setAngle(0);
-            punch.y -= 1000;
+            punch.y -= 500;
             punch.anims.play('machinegun',true);
         }
     }
