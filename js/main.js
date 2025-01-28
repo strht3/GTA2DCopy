@@ -794,6 +794,7 @@ mainScene.punchBeam = function(direction){
     var posY = this.player.y;
     var punch = this.PunchGroup.create(posX, posY, this.attacktype);
     console.log('Playing animation for attack type: ' + this.attacktype);
+    var punchdelay = 500;
 
     punch.on('animationcomplete', function(){
         console.log('animation complete for attack type:',this.attacktype);
@@ -815,6 +816,7 @@ mainScene.punchBeam = function(direction){
             punch.setVelocityY(-300);
         }
     }else if(this.attacktype === 'Bat'){
+        var punchdelay = 1000;
         if(direction == 'right'){
             punch.setAngle(90);
             punch.anims.play('explosion',true);
@@ -829,6 +831,7 @@ mainScene.punchBeam = function(direction){
             punch.anims.play('explosion',true);
         }
     }else if(this.attacktype === 'KnifeSlash'){
+        var punchdelay = 300;
         punch.setDisplaySize(75,75);
         if(direction == 'right'){
             punch.setAngle(90);
@@ -848,6 +851,7 @@ mainScene.punchBeam = function(direction){
             punch.anims.play('KnifeSlash',true);
         }
     }else if(this.attacktype === 'KatanaSlash'){
+        var punchdelay = 1300;
         punch.setDisplaySize(400,318)
         if(direction == 'right'){
             punch.setAngle(0);
@@ -863,6 +867,7 @@ mainScene.punchBeam = function(direction){
             punch.anims.play('KatanaSlash',true);
         }
     }else if(this.attacktype === 'bullet'){
+        var punchdelay = 300;
         punch.setDisplaySize(15,15);
         if(direction == 'right'){
             punch.setAngle(90);
@@ -878,6 +883,7 @@ mainScene.punchBeam = function(direction){
             punch.setVelocityY(-600);
         }
     }else if(this.attacktype === 'machinegun'){
+        var punchdelay = 10;
         punch.setDisplaySize(500,500);
         if(direction == 'right'){
             punch.setAngle(90);
@@ -900,7 +906,7 @@ mainScene.punchBeam = function(direction){
 
     
     this.punchcooldown = this.time.addEvent({
-        delay:500,
+        delay:punchdelay,
         callback:this.punchFalse,
         loop:false,
         callbackScope:this
@@ -1028,7 +1034,9 @@ mainScene.carCrush = function(car, layer){
     car.destroy();
 }
 mainScene.PlayerAttack = function(enemy, attack){
-    attack.destroy();
+    if(this.attacktype == 'fireball'){
+        attack.destroy();
+    };
     enemy.destroy();
     this.enemyNumber -= 1;
     this.setMoney(5, "Add");
