@@ -786,7 +786,7 @@ mainScene.createAttackAnimation = function(){
         key: 'machinegun',
         frames: this.anims.generateFrameNumbers('machinegun', { start: 0, end: 1 }),
         frameRate: 10,
-        repeat: 0
+        repeat: 5
     });
 }
 mainScene.punchBeam = function(direction){
