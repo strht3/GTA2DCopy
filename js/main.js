@@ -778,7 +778,7 @@ mainScene.createAttackAnimation = function(){
     });
     this.anims.create({
         key: 'explosion',
-        frames: this.anims.generateFrameNumbers('explosion', { start: 0, end: 5 }),
+        frames: this.anims.generateFrameNumbers('Explosion', { start: 0, end: 5 }),
         frameRate: 10,
         repeat: 0
     });
