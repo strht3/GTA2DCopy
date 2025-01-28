@@ -1009,6 +1009,7 @@ mainScene.PunchAudio = function(enemy){
     this.sound.play('enemypunch', {volume: 1, loop:false});
     this.PlayerHealth -= 0.5;
     localStorage.setItem('health',this.PlayerHealth);
+    this.sound.play("Damage", {volume: 1, loop:false});
     this.player.setTint(0xff0000);
     var hpText = "Health : " + this.PlayerHealth;
     this.PlayerHpText.text = hpText;
