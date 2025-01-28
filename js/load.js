@@ -71,11 +71,11 @@ loadScene.preload = function() {
     this.load.audio("Buy","assets/Audios/購入.mp3");
     this.load.audio("Earn","assets/Audios/小銭.mp3");
     this.load.audio("Cancel","assets/Audios/ビープ音1.mp3");
-    this.load.audio("Cancel","assets/Audios/サブマシンガン発射2.mp3");
-    this.load.audio("Cancel","assets/Audios/ナイフを投げる.mp3");
-    this.load.audio("Cancel","assets/Audios/剣で斬る5.mp3");
-    this.load.audio("Cancel","assets/Audios/岩が真っ二つに割れる.mp3");
-    this.load.audio("Cancel","assets/Audios/重機関銃を乱射1.mp3");
+    this.load.audio("machinegun","assets/Audios/サブマシンガン発射2.mp3");
+    this.load.audio("KnifeSlash","assets/Audios/ナイフを投げる.mp3");
+    this.load.audio("KatanaSlash","assets/Audios/剣で斬る2.mp3");
+    this.load.audio("Explosion","assets/Audios/岩が真っ二つに割れる.mp3");
+    this.load.audio("Bullet","assets/Audios/拳銃を撃つ.mp3");
 };
 
 loadScene.create = function() {

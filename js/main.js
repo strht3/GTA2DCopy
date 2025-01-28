@@ -295,22 +295,18 @@ mainScene.moveplayer = function(){
         this.player.anims.play('punchright');
         this.punchBeam(this.player.direction);
         this.player.isPunching = true
-        this.sound.play('punch', {volume: 1, loop:false});
     }else if(cursors.space.isDown && this.player.direction == 'left'&& !this.player.isPunching){
         this.player.anims.play('punchleft');
         this.punchBeam(this.player.direction);
         this.player.isPunching = true
-        this.sound.play('punch', {volume: 1, loop:false});
     }else if(cursors.space.isDown && this.player.direction == 'down'&& !this.player.isPunching){
         this.player.anims.play('punchdown');
         this.punchBeam(this.player.direction);
         this.player.isPunching = true
-        this.sound.play('punch', {volume: 1, loop:false});
     }else if(cursors.space.isDown && this.player.direction == 'up'&& !this.player.isPunching){
         this.player.anims.play('punchup');
         this.punchBeam(this.player.direction);
         this.player.isPunching = true
-        this.sound.play('punch', {volume: 1, loop:false});
     };
     if(this.keys.keyE.isDown){
         this.scene.pause("mainScene");
@@ -707,30 +703,6 @@ mainScene.createEnemyAnimation = function(enemy){
         repeat: 0
     });
 }
-mainScene.createAttackAnimation = function(){
-    this.anims.create({
-        key: 'BatSmash',
-        frames: this.anims.generateFrameNumbers('Explosion', { start: 1, end: 7 }),
-        frameRate: 10
-    });
-    this.anims.create({
-        key: 'KnifeSlash',
-        frames: this.anims.generateFrameNumbers('KnifeSlash', { start: 1, end: 7 }),
-        frameRate: 10
-    });
-    this.anims.create({
-        key: 'KatanaSlash',
-        frames: this.anims.generateFrameNumbers('KatanaSlash', { start: 1, end: 4 }),
-        frameRate: 10,
-        repeat: 5
-    });
-    this.anims.create({
-        key: 'GunBarrage',
-        frames: this.anims.generateFrameNumbers('machinegun', { start: 1, end: 2 }),
-        frameRate: 10,
-        repeat: 10
-    });
-}
 mainScene.createPunchGroup = function(){
     this.createAttackAnimation();
     this.PunchGroup = this.physics.add.group();
@@ -773,6 +745,7 @@ mainScene.punchBeam = function(direction){
         punch.destroy();
     }, this);
     if(this.attacktype === 'fireball'){
+        this.sound.play('punch', {volume: 1, loop:false});
         if(direction == 'right'){
             punch.setAngle(90);
             punch.setVelocityX(300);
@@ -787,12 +760,14 @@ mainScene.punchBeam = function(direction){
             punch.setVelocityY(-300);
         }
     }else if(this.attacktype === 'Bat'){
+        this.sound.play("Explosion", {volume: 1, loop:false});
         punchdelay = 2000;
         punch.setDisplaySize(2000,2000)
         punch.setSize(350,350);
         punch.setOffset(50,30);
         punch.anims.play('Explosion',true);
     }else if(this.attacktype === 'KnifeSlash'){
+        this.sound.play("KnifeSlash", {volume: 1, loop:false});
         punchdelay = 300;
         punch.setDisplaySize(150,150);
         if(direction == 'right'){
@@ -813,6 +788,7 @@ mainScene.punchBeam = function(direction){
             punch.anims.play('KnifeSlash',true);
         }
     }else if(this.attacktype === 'KatanaSlash'){
+        this.sound.play("KatanaSlash", {volume: 1, loop:false});
         punchdelay = 1300;
         punch.setDisplaySize(400,318)
         if(direction == 'right'){
@@ -829,6 +805,7 @@ mainScene.punchBeam = function(direction){
             punch.anims.play('KatanaSlash',true);
         }
     }else if(this.attacktype === 'bullet'){
+        this.sound.play("Bullet", {volume: 1, loop:false});
         punchdelay = 300;
         punch.setDisplaySize(15,15);
         if(direction == 'right'){
@@ -845,6 +822,7 @@ mainScene.punchBeam = function(direction){
             punch.setVelocityY(-600);
         }
     }else if(this.attacktype === 'machinegun'){
+        this.sound.play("Bullet", {volume: 1, loop:false});
         punchdelay = 10;
         punch.setDisplaySize(500,500);
         if(direction == 'right'){
@@ -865,6 +843,7 @@ mainScene.punchBeam = function(direction){
             punch.anims.play('machinegun',true);
         }
     }
+    this.sound.play('punch', {volume: 1, loop:false});
     this.punchcooldown = this.time.addEvent({
         delay:punchdelay,
         callback:this.punchFalse,
