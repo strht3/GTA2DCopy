@@ -568,6 +568,8 @@ mainScene.itemchange = function(){
             var subattack = 'bullet';
         }else if(this.item.Hand[0] == 'MAC11' || this.item.Hand[0] == 'G36K'){
             var subattack = 'machinegun';
+        }else if(this.item.Hand[0] == 'Bat'){
+            var subattack = 'Bat';
         }
         this.attacktype = subattack;
     }else if(this.keys.key2.isDown){
@@ -582,6 +584,8 @@ mainScene.itemchange = function(){
             var subattack = 'bullet';
         }else if(this.item.Hand[1] == 'MAC11' || this.item.Hand[1] == 'G36K'){
             var subattack = 'machinegun';
+        }else if(this.item.Hand[1] == 'Bat'){
+            var subattack = 'Bat';
         }
         this.attacktype = subattack;
     }else if(this.keys.key3.isDown){
@@ -596,6 +600,8 @@ mainScene.itemchange = function(){
             var subattack = 'bullet';
         }else if(this.item.Hand[2] == 'MAC11' || this.item.Hand[2] == 'G36K'){
             var subattack = 'machinegun';
+        }else if(this.item.Hand[2] == 'Bat'){
+            var subattack = 'Bat';
         }
         this.attacktype = subattack;
     }else if(this.keys.key4.isDown){
@@ -610,6 +616,8 @@ mainScene.itemchange = function(){
             var subattack = 'bullet';
         }else if(this.item.Hand[3] == 'MAC11' || this.item.Hand[3] == 'G36K'){
             var subattack = 'machinegun';
+        }else if(this.item.Hand[3] == 'Bat'){
+            var subattack = 'Bat';
         }
         this.attacktype = subattack;
     }else if(this.keys.key5.isDown){
@@ -624,6 +632,8 @@ mainScene.itemchange = function(){
             var subattack = 'bullet';
         }else if(this.item.Hand[4] == 'MAC11' || this.item.Hand[4] == 'G36K'){
             var subattack = 'machinegun';
+        }else if(this.item.Hand[4] == 'Bat'){
+            var subattack = 'Bat';
         }
         this.attacktype = subattack;
     }
@@ -762,7 +772,6 @@ mainScene.punchBeam = function(direction){
     punch.on('animationcomplete', function(){
         punch.destroy();
     }, this);
-    console.log(this.attacktype);
     if(this.attacktype === 'fireball'){
         if(direction == 'right'){
             punch.setAngle(90);
