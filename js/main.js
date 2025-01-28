@@ -848,7 +848,7 @@ mainScene.punchBeam = function(direction){
             punch.anims.play('KnifeSlash',true);
         }
     }else if(this.attacktype === 'KatanaSlash'){
-        punch.setDisplaySize(200,159)
+        punch.setDisplaySize(400,318)
         if(direction == 'right'){
             punch.setAngle(0);
             punch.anims.play('KatanaSlash',true);
