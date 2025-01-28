@@ -76,6 +76,8 @@ loadScene.preload = function() {
     this.load.audio("KatanaSlash","assets/Audios/剣で斬る2.mp3");
     this.load.audio("Explosion","assets/Audios/岩が真っ二つに割れる.mp3");
     this.load.audio("Bullet","assets/Audios/拳銃を撃つ.mp3");
+    this.load.audio("EnemyDeath","assets/Audios/「くおぉっ！」.mp3");
+    this.load.audio("Death","assets/Audios/「ぐああーーっ！」.mp3");
 };
 
 loadScene.create = function() {

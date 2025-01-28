@@ -979,6 +979,7 @@ mainScene.PlayerAttack = function(enemy, attack){
     enemy.destroy();
     this.enemyNumber -= 1;
     this.setMoney(5, "Add");
+    this.sound.play("EnemyDeath", {volume: 0.5, loop:false});
     this.sound.play('Earn', {volume: 1, loop:false});
 }
 mainScene.punchFalse = function(){
@@ -1036,6 +1037,7 @@ mainScene.healPlayerHealthBySecond = function(){
 }
 mainScene.Die = function(){
     //Die, and Respawn in few seconds at homepoint/hospital
+    this.sound.play("Death", {volume: 1, loop:false});
     this.player.setVisible(false);
     setTimeout(function(){
         mainScene.player.x = 200;
