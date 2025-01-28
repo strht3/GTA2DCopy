@@ -791,19 +791,7 @@ mainScene.punchBeam = function(direction){
         punch.setDisplaySize(2000,2000)
         punch.setSize(350,350);
         punch.setOffset(50,30);
-        if(direction == 'right'){
-            punch.setAngle(90);
-            punch.anims.play('Explosion',true);
-        }else if(direction == 'left'){
-            punch.setAngle(270);
-            punch.anims.play('Explosion',true);
-        }else if(direction == 'down'){
-            punch.setAngle(180);
-            punch.anims.play('Explosion',true);
-        }else if(direction == 'up'){
-            punch.setAngle(0);
-            punch.anims.play('Explosion',true);
-        }
+        punch.anims.play('Explosion',true);
     }else if(this.attacktype === 'KnifeSlash'){
         punchdelay = 300;
         punch.setDisplaySize(150,150);
