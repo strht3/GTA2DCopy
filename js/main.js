@@ -880,15 +880,19 @@ mainScene.punchBeam = function(direction){
         punch.setDisplaySize(375,375);
         if(direction == 'right'){
             punch.setAngle(90);
+            punch.x += 200;
             punch.anims.play('machinegun',true);
         }else if(direction == 'left'){
             punch.setAngle(270);
+            punch.x -= 200;
             punch.anims.play('machinegun',true);
         }else if(direction == 'down'){
             punch.setAngle(180);
+            punch.y += 200;
             punch.anims.play('machinegun',true);
         }else if(direction == 'up'){
             punch.setAngle(0);
+            punch.y -= 200;
             punch.anims.play('machinegun',true);
         }
     }
