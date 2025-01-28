@@ -762,6 +762,7 @@ mainScene.punchBeam = function(direction){
     punch.on('animationcomplete', function(){
         punch.destroy();
     }, this);
+    console.log(this.attacktype);
     if(this.attacktype === 'fireball'){
         if(direction == 'right'){
             punch.setAngle(90);
