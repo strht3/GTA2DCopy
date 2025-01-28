@@ -789,8 +789,8 @@ mainScene.punchBeam = function(direction){
     }else if(this.attacktype === 'Bat'){
         punchdelay = 2000;
         punch.setDisplaySize(1200,1200)
-        punch.setSize(10000,10000);
-        punch.setOffset(150,150);
+        punch.setSize(2500,2500);
+        punch.setOffset(1250,1250);
         if(direction == 'right'){
             punch.setAngle(90);
             punch.anims.play('Explosion',true);
