@@ -777,7 +777,7 @@ mainScene.createAttackAnimation = function(){
         repeat: 0
     });
     this.anims.create({
-        key: 'explosion',
+        key: 'Explosion',
         frames: this.anims.generateFrameNumbers('Explosion', { start: 0, end: 5 }),
         frameRate: 10,
         repeat: 0
@@ -819,16 +819,16 @@ mainScene.punchBeam = function(direction){
         var punchdelay = 1000;
         if(direction == 'right'){
             punch.setAngle(90);
-            punch.anims.play('explosion',true);
+            punch.anims.play('Explosion',true);
         }else if(direction == 'left'){
             punch.setAngle(270);
-            punch.anims.play('explosion',true);
+            punch.anims.play('Explosion',true);
         }else if(direction == 'down'){
             punch.setAngle(180);
-            punch.anims.play('explosion',true);
+            punch.anims.play('Explosion',true);
         }else if(direction == 'up'){
             punch.setAngle(0);
-            punch.anims.play('explosion',true);
+            punch.anims.play('Explosion',true);
         }
     }else if(this.attacktype === 'KnifeSlash'){
         var punchdelay = 300;
