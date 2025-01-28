@@ -790,7 +790,7 @@ mainScene.punchBeam = function(direction){
         punchdelay = 2000;
         punch.setDisplaySize(2000,2000)
         punch.setSize(1200,1200);
-        punch.setOffset(1000,1000);
+        punch.setOffset(0,0);
         if(direction == 'right'){
             punch.setAngle(90);
             punch.anims.play('Explosion',true);
