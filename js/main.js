@@ -789,7 +789,7 @@ mainScene.punchBeam = function(direction){
     }else if(this.attacktype === 'Bat'){
         punchdelay = 2000;
         punch.setDisplaySize(1200,1200)
-        punch.setSize(2500,2500);
+        punch.setSize(1200,1200);
         punch.setOffset(0,0);
         if(direction == 'right'){
             punch.setAngle(90);
