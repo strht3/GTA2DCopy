@@ -46,8 +46,6 @@ mainScene.update = function() {
     this.healPlayerHealthBySecond();
     this.itemchange();
 };
-
-
 mainScene.config = function () {
     //datas
     this.enemyData = [{
@@ -62,7 +60,6 @@ mainScene.config = function () {
     this.TILE_SCALE = 4;
     this.TILE_COLUMN = 35;
     this.TILE_ROW = 50;
-    
     //Player health
     this.PlayerHealth = parseFloat(localStorage.getItem('health')) || 15;
 };
@@ -99,16 +96,13 @@ mainScene.createMap = function() {
     this.borderLayer = this.map.createLayer("Border", this.tiles, 0, 0);
     this.borderLayer.setDisplaySize(layerW,layerH);
     this.borderLayer.setCollisionByExclusion([-1]);
-    
     //world layer
     this.worldLayer = this.map.createLayer("World", this.tiles, 0, 0);
     this.worldLayer.setDisplaySize(layerW,layerH);
     this.worldLayer.setCollisionByExclusion([-1]);
-
     //カメラのバウンド    
     this.physics.world.bounds.width = this.groundLayer.displayWidth;
     this.physics.world.bounds.height = this.groundLayer.displayHeight;
-        
     this.cameras.main.setBounds(
         0,
         0,
@@ -116,7 +110,6 @@ mainScene.createMap = function() {
         this.physics.world.bounds.height,
     );
 };
-
 mainScene.createPlayer = function(){
     // プレイヤー作成
     var playerX = 200;
@@ -139,13 +132,10 @@ mainScene.createPlayer = function(){
     // カメラがプレイヤーを追跡する
     this.cameras.main.startFollow(this.player);
     this.player.isPunching = false;
-    
     //プレイヤーの体力、スタミナ設定
     var datamoney = parseInt(localStorage.getItem('money')) || 0;
     this.setMoney(datamoney, "Set");
-
 }
-
 mainScene.createPlayerAnimation = function(){
     // 最初のフレームを0番にする
     this.player.setFrame(0);
@@ -244,11 +234,8 @@ mainScene.moveplayer = function(){
         this.Area.setVelocityY(0);
     }
     // 必要な処理
-    
-    
     this.PlayerX = this.player.x;
     this.PlayerY = this.player.y;
-    
     if(this.keys.keyD.isDown || cursors.right.isDown) {
         this.player.direction = 'right'
         // 右に移動
@@ -300,11 +287,9 @@ mainScene.moveplayer = function(){
         this.player.anims.stop();
         //キーを放すと正面を向く
         this.player.anims.play('turn', true);
-        
         if (this.sound.get('walking')) {
             this.sound.get('walking').pause();
         }
-
     };
     if(cursors.space.isDown && this.player.direction == 'right' && !this.player.isPunching){
         this.player.anims.play('punchright');
@@ -327,7 +312,6 @@ mainScene.moveplayer = function(){
         this.player.isPunching = true
         this.sound.play('punch', {volume: 1, loop:false});
     };
-    
     if(this.keys.keyE.isDown){
         this.scene.pause("mainScene");
         this.scene.wake("Inventory", {
@@ -349,13 +333,11 @@ mainScene.moveplayer = function(){
             'money' : this.PlayerMoney,
         });
     }
-    
 }
 mainScene.createUI = function () {
     var hpText = "Health : " + this.PlayerHealth;
     this.PlayerHpText = this.add.text(50, 800, hpText, { color: '#ffffff', fontSize: '60px' ,fontFamily: 'gtaFontNormal'});
     this.PlayerHpText.setScrollFactor(0);
-    
     var moneyText = "$ " + this.PlayerMoney;
     this.Player$Text = this.add.text(50, 750, moneyText, { color: '#ffff00', fontSize: '60px' ,fontFamily: 'gtaFontNormal'});
     this.Player$Text.setScrollFactor(0);
@@ -368,15 +350,11 @@ mainScene.setCollider = function(){
     this.physics.add.collider(this.player,this.borderLayer);
     //プレイヤーはworldレイヤーと衝突
     this.physics.add.collider(this.player,this.worldLayer);
-    
     this.physics.add.overlap(this.Area,this.enemyGroup,this.TouchedArea,null,this)
 };
-
 mainScene.TouchedArea = function(area, enemy){
     enemy.foundPlayer = true;
 };
-
-
 mainScene.createEnemyGroup = function(){
     this.enemyGroup = this.physics.add.group();
     this.createEnemy();
@@ -432,17 +410,13 @@ mainScene.hitWall = function(enemy,layer){
     this.enemySpeed = [100,150,200,];
     var enemypowerinhitwall = Phaser.Math.RND.pick(this.enemySpeed);
     var movementinhitwall
-
     if(enemy.direction == 'right'){
         movementinhitwall = 'left'
     } else if(enemy.direction == 'left'){
-        ;
         movementinhitwall = 'right'
     }else if(enemy.direction == 'up'){
-        ;
         movementinhitwall = 'down'
     } else if(enemy.direction == 'down'){
-        ;
         movementinhitwall = 'up'
     }
     if(movementinhitwall == 'right') {
@@ -529,19 +503,16 @@ mainScene.MoveEnemy = function(enemy){
                 enemy.anims.play('enemyturn', true);
             }
         }else if(enemy.foundPlayer == true){
-            
             var speed = 250;
             var degree = Phaser.Math.Angle.Between(enemy.x, enemy.y, this.player.x, this.player.y);
             var angle = Phaser.Math.RadToDeg(degree);
             let distance = Math.sqrt(Math.pow(this.player.x - enemy.x, 2) + Math.pow(this.player.y - enemy.y, 2));
-            
             if(distance > 100){
                 this.enemyPunching = true;
                 enemy.anims.play('EnemyPunchRight',false);
                 enemy.anims.play('EnemyPunchLeft',false);
                 enemy.anims.play('EnemyPunchUp',false);
                 enemy.anims.play('EnemyPunchDown',false);
-                
                 if(angle>-55 && angle<0 || angle > 0 && angle < 45){
                     enemy.anims.play('enemyright',true);
                 }else if(angle>135 && angle<180 || angle < -180 && angle > -145){
@@ -551,7 +522,6 @@ mainScene.MoveEnemy = function(enemy){
                 }else if(angle>45 && angle<135){
                     enemy.anims.play('enemydown',true);
                 };
-    
                 enemy.setVelocityX(speed * Math.cos(degree));
                 enemy.setVelocityY(speed * Math.sin(degree));
             }else if(distance < 100){
@@ -563,22 +533,18 @@ mainScene.MoveEnemy = function(enemy){
                     enemy.direction = "right";
                     enemy.anims.play('EnemyPunchRight',true);
                     this.enemyPunching = true;
-                    
                 }else if(angle>135 && angle<180 || angle < -180 && angle > -145  && !this.enemyPunching){
                     enemy.direction = "left";
                     enemy.anims.play('EnemyPunchLeft',true);
                     this.enemyPunching = true
-                    
                 }else if(angle > -145 && angle < -55 && !this.enemyPunching){
                     enemy.direction = "up";
                     enemy.anims.play('EnemyPunchUp',true);
                     this.enemyPunching = true;
-                    
                 }else if(angle>45 && angle<135 && !this.enemyPunching){
                     enemy.direction = "down";
                     enemy.anims.play('EnemyPunchDown',true);
                     this.enemyPunching = true;
-                
                 };
                 let distance = Math.sqrt(Math.pow(this.player.x - enemy.x, 2) + Math.pow(this.player.y - enemy.y, 2));
                 this.PlayerDamage(enemy, distance);
@@ -763,7 +729,6 @@ mainScene.createPunchGroup = function(){
     this.physics.add.collider(this.PunchGroup,this.borderLayer,this.punchHitWall,null,this);
 }
 mainScene.createAttackAnimation = function(){
-    console.log("creating animations for attacks")
     this.anims.create({
         key: 'KatanaSlash',
         frames: this.anims.generateFrameNumbers('KatanaSlash', { start: 0, end: 3 }),
@@ -793,14 +758,10 @@ mainScene.punchBeam = function(direction){
     var posX = this.player.x;
     var posY = this.player.y;
     var punch = this.PunchGroup.create(posX, posY, this.attacktype);
-    console.log('Playing animation for attack type: ' + this.attacktype);
     var punchdelay = 500;
-
     punch.on('animationcomplete', function(){
-        console.log('animation complete for attack type:',this.attacktype);
         punch.destroy();
     }, this);
-    
     if(this.attacktype === 'fireball'){
         if(direction == 'right'){
             punch.setAngle(90);
@@ -816,7 +777,8 @@ mainScene.punchBeam = function(direction){
             punch.setVelocityY(-300);
         }
     }else if(this.attacktype === 'Bat'){
-        var punchdelay = 1000;
+        punchdelay = 1000;
+        console.log('playing bat animation');
         if(direction == 'right'){
             punch.setAngle(90);
             punch.anims.play('Explosion',true);
@@ -831,7 +793,7 @@ mainScene.punchBeam = function(direction){
             punch.anims.play('Explosion',true);
         }
     }else if(this.attacktype === 'KnifeSlash'){
-        var punchdelay = 300;
+        punchdelay = 300;
         punch.setDisplaySize(75,75);
         if(direction == 'right'){
             punch.setAngle(90);
@@ -851,7 +813,7 @@ mainScene.punchBeam = function(direction){
             punch.anims.play('KnifeSlash',true);
         }
     }else if(this.attacktype === 'KatanaSlash'){
-        var punchdelay = 1300;
+        punchdelay = 1300;
         punch.setDisplaySize(400,318)
         if(direction == 'right'){
             punch.setAngle(0);
@@ -867,7 +829,7 @@ mainScene.punchBeam = function(direction){
             punch.anims.play('KatanaSlash',true);
         }
     }else if(this.attacktype === 'bullet'){
-        var punchdelay = 300;
+        punchdelay = 300;
         punch.setDisplaySize(15,15);
         if(direction == 'right'){
             punch.setAngle(90);
@@ -883,7 +845,7 @@ mainScene.punchBeam = function(direction){
             punch.setVelocityY(-600);
         }
     }else if(this.attacktype === 'machinegun'){
-        var punchdelay = 10;
+        punchdelay = 10;
         punch.setDisplaySize(500,500);
         if(direction == 'right'){
             punch.setAngle(90);
@@ -903,8 +865,6 @@ mainScene.punchBeam = function(direction){
             punch.anims.play('machinegun',true);
         }
     }
-
-    
     this.punchcooldown = this.time.addEvent({
         delay:punchdelay,
         callback:this.punchFalse,
@@ -1128,5 +1088,4 @@ mainScene.setMoney = function(amount, addOrSet){
     //localStorage.setItem('items',this.item);
     localStorage.setItem('items',JSON.stringify(this.item));
     localStorage.setItem('health',this.PlayerHealth);
-
 }
