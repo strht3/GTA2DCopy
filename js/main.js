@@ -787,8 +787,8 @@ mainScene.punchBeam = function(direction){
             punch.setVelocityY(-300);
         }
     }else if(this.attacktype === 'Bat'){
-        punchdelay = 1000;
-        console.log('playing bat animation');
+        punchdelay = 2000;
+        punch.setDisplaySize(300,300)
         if(direction == 'right'){
             punch.setAngle(90);
             punch.anims.play('Explosion',true);
