@@ -877,22 +877,22 @@ mainScene.punchBeam = function(direction){
             punch.setVelocityY(-600);
         }
     }else if(this.attacktype === 'machinegun'){
-        punch.setDisplaySize(375,375);
+        punch.setDisplaySize(500,500);
         if(direction == 'right'){
             punch.setAngle(90);
-            punch.x += 2000;
+            punch.x += 4000;
             punch.anims.play('machinegun',true);
         }else if(direction == 'left'){
             punch.setAngle(270);
-            punch.x -= 2000;
+            punch.x -= 4000;
             punch.anims.play('machinegun',true);
         }else if(direction == 'down'){
             punch.setAngle(180);
-            punch.y += 2000;
+            punch.y += 4000;
             punch.anims.play('machinegun',true);
         }else if(direction == 'up'){
             punch.setAngle(0);
-            punch.y -= 2000;
+            punch.y -= 4000;
             punch.anims.play('machinegun',true);
         }
     }
