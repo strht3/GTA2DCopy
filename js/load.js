@@ -26,7 +26,7 @@ loadScene.preload = function() {
         frameWidth:1935,
         frameHeight:1935,
     });
-    this.load.spritesheet('Explosion', "assets/images/Explosion.png", {
+    this.load.spritesheet('Explosion', "assets/images/explosion.png", {
         frameWidth:480,
         frameHeight:384,
     });
