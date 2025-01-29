@@ -56,6 +56,7 @@ mainScene.update = function() {
         this.startPoliceSpawn();
         this.policeSpawnStarted = true;
     }
+    this.wantedbyPolice();
 };
 mainScene.config = function () {
     //datas
@@ -769,6 +770,10 @@ mainScene.createPolice = function(){
     police.isDamage = false;
     this.MovePolice(police);
 
+    this.physics.add.collider(police, this.worldLayer, function(){
+        police.foundPlayer = true;
+        this.MovePolice(police);
+    },null, this);
 }
 mainScene.createPoliceAnimation = function(police){
     // 最初のフレームを0番にする
@@ -884,8 +889,11 @@ mainScene.MovePolice = function(police){
             let distance = Math.sqrt(Math.pow(this.player.x - createPolice.x, 2) + Math.pow(this.player.y - police.y, 2));
             this.PlayerDamage(police, distance);
             this.time.delayedCall(500,this.policeSetPunchFalse,[],this);
-        };
-    };
+        }
+        this.time.delayedCall(100, function(){
+            this.MovePolice(police);
+        },[],this);
+    }
 }
 mainScene.policeSetPunchFalse = function() {
     this.policePunching = false;
@@ -894,6 +902,7 @@ mainScene.createPunchGroup = function(){
     this.createAttackAnimation();
     this.PunchGroup = this.physics.add.group();
     this.physics.add.overlap(this.enemyGroup,this.PunchGroup,this.PlayerAttack,null,this);
+    this.physics.add.overlap(this.policeGroup,this.PunchGroup,this.PlayerAttack,null,this);
     this.physics.add.collider(this.PunchGroup,this.worldLayer,this.punchHitWall,null,this);
     this.physics.add.collider(this.PunchGroup,this.borderLayer,this.punchHitWall,null,this);
 }
