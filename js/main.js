@@ -16,6 +16,7 @@ mainScene.create = function (data) {
     //敵作成
     this.createEnemyGroup();
     //攻撃作成
+    this.policeGroup = this.physics.add.group();
     this.createAttackAnimation();
     this.createPunchGroup();
     //障害物作成
