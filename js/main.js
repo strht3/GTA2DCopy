@@ -350,6 +350,8 @@ mainScene.setCollider = function(){
 };
 mainScene.TouchedArea = function(area, enemy){
     enemy.foundPlayer = true;
+    this.actionBGM = this.sound.add("Battle", {volume: 1, Loop : true});
+    this.actionBGM.play();
 };
 mainScene.createEnemyGroup = function(){
     this.enemyGroup = this.physics.add.group();
@@ -402,6 +404,7 @@ mainScene.createEnemy = function(){
 }
 mainScene.hitWall = function(enemy,layer){
     enemy.foundPlayer = false;
+    this.actionBGM.stop();
     enemy.direction = enemydirection;
     this.enemySpeed = [100,150,200,];
     var enemypowerinhitwall = Phaser.Math.RND.pick(this.enemySpeed);
@@ -973,6 +976,7 @@ mainScene.PlayerAttack = function(enemy, attack){
     enemy.destroy();
     this.enemyNumber -= 1;
     this.setMoney(5, "Add");
+    this.actionBGM.stop();
     this.sound.play("EnemyDeath", {volume: 0.5, loop:false});
     this.sound.play('Earn', {volume: 1, loop:false});
 }
