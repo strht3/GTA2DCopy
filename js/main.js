@@ -759,14 +759,10 @@ mainScene.createPolice = function(){
     var y = position[1];
     // 敵作成
     var police = this.policeGroup.create(x*16*4, y*16*4,'FBI');
-    // 敵のサイズ変更
-    //enemy.body.setSize(350,350);
     police.setDisplaySize(this.TILE_WIDTH * this.TILE_SCALE,this.TILE_HEIGTH * this.TILE_SCALE,);
     police.setCollideWorldBounds(true);
     this.createPoliceAnimation(police);
     // 敵の移動速度をランダムに設定する
-    //var speed = Phaser.Math.RND.pick(this.enemySpeed);
-    //enemy.setVelocityX(speed);
     police.foundPlayer = true;
     police.isDamage = false;
     this.MovePolice(police);
@@ -1221,8 +1217,11 @@ mainScene.carCrush = function(car, layer){
 }
 mainScene.PlayerAttack = function(enemy, attack){
     console.log(enemy);
+    console.log(this.policeGroup.getChildren());
     if(this.policeGroup.contains(enemy)){
         console.log("Attack is touching police")
+    }else{
+        console.log("Attack is not touching police")
     }
     if(this.attacktype == 'fireball'){
         attack.destroy();
