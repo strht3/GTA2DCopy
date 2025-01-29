@@ -572,22 +572,6 @@ mainScene.MoveEnemy = function(enemy){
     }
 };
 mainScene.itemchange = function(){
-    if(this.item.Hand[0] == null){
-        this.attacktype = 'fireball';
-        return;
-    }else if(this.item.Hand[0] == 'Knife'){
-        var subattack = 'KnifeSlash';
-    }else if(this.item.Hand[0] == 'CheapSword'){
-        var subattack = 'KatanaSlash';
-    }else if(this.item.Hand[0] == 'Glock17'){
-        var subattack = 'bullet';
-    }else if(this.item.Hand[0] == 'MAC11' || this.item.Hand[0] == 'G36K'){
-        var subattack = 'machinegun';
-    }else if(this.item.Hand[0] == 'Bat'){
-        var subattack = 'Bat';
-    }
-    this.attacktype = subattack;
-
     if(this.keys.key1.isDown){
         if(this.item.Hand[0] == null){
             this.attacktype = 'fireball';
