@@ -1116,7 +1116,7 @@ mainScene.wantedbyPolice = function(){
             CrimeLevel = 5
         }
         var kills = "Level " + CrimeLevel;
-        this.CrimeLevel = this.add.text(400, 50, hpText, { color: '#ff0000', fontSize: '60px' ,fontFamily: 'gtaFontNormal'});
+        this.CrimeLevel = this.add.text(400, 50, kills, { color: '#ff0000', fontSize: '60px' ,fontFamily: 'gtaFontNormal'});
         this.CrimeLevel.setScrollFactor(0);
     }
 }
