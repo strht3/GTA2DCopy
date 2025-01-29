@@ -37,6 +37,8 @@ mainScene.create = function (data) {
     this.keys.key3 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.THREE);
     this.keys.key4 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.FOUR);
     this.keys.key5 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.FIVE);
+
+    this.actionBGM = null;
 };
 mainScene.update = function() {
     //move player if it is showed
@@ -350,7 +352,9 @@ mainScene.setCollider = function(){
 };
 mainScene.TouchedArea = function(area, enemy){
     enemy.foundPlayer = true;
-    this.actionBGM = this.sound.add("Battle", {volume: 1, Loop : true});
+    if(!this.actionBGM){
+        this.actionBGM = this.sound.add("Battle", {volume: 1, Loop : true});
+    }
     this.actionBGM.play();
 };
 mainScene.createEnemyGroup = function(){
