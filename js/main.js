@@ -887,7 +887,6 @@ mainScene.MovePolice = function(police){
                 police.anims.play('policePunchDown',true);
                 this.policePunching = true;
             };
-            let distance = Math.sqrt(Math.pow(this.player.x - createPolice.x, 2) + Math.pow(this.player.y - police.y, 2));
             this.PlayerDamage(police, distance);
             this.time.delayedCall(500,this.policeSetPunchFalse,[],this);
         }
