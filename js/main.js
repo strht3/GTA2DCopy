@@ -890,7 +890,7 @@ mainScene.createCar = function(){
     car.setDisplaySize(this.TILE_WIDTH * this.TILE_SCALE * 3,this.TILE_HEIGTH * this.TILE_SCALE * 1.9);
     car.setCollideWorldBounds(true);
     this.createCarAnimation(car);
-    //this.sound.play("Car", {volume: 0.3, loop:false});
+    this.sound.play("Car", {volume: 0.3, loop:false});
     this.MoveCar(car,position);
 }
 mainScene.MoveCar = function(car,position){
