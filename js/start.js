@@ -32,11 +32,12 @@ startScene.create = function () {
     }else{
         this.item = JSON.parse(localStorage.getItem('items'));
     }
-    // Attempt to play the audio automatically
-    this.openingBGM = this.sound.add("Opening", { volume: 1, loop: true });
-    this.openingBGM.play().catch(function(error) {
-        console.log('Audio playback failed:', error);
-    });
+    // Wait for user interaction to start the audio
+    this.input.once('pointerdown', function () {
+        this.openingBGM = this.sound.add("Opening", { volume: 1, loop: true });
+        this.openingBGM.play();
+    }, this);
+
     // キーをクリックするとゲームスタート
     this.input.keyboard.on('keydown', function(event) {
         if(this.openingBGM){
