@@ -39,9 +39,10 @@ mainScene.create = function (data) {
     this.keys.key5 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.FIVE);
 
     this.actionBGM = null;
-
+    this.policeSpawnStarted = false;
     this.kills = 0;
     this.wanted = false;
+    this.police = false;
 };
 mainScene.update = function() {
     //move player if it is showed
@@ -50,7 +51,11 @@ mainScene.update = function() {
     }
     this.healPlayerHealthBySecond();
     this.itemchange();
-    this.wantedbyPolice();
+    
+    if(this.kills >= 40 && !this.policeSpawnStarted){
+        this.startPoliceSpawn();
+        this.policeSpawnStarted = true;
+    }
 };
 mainScene.config = function () {
     //datas
@@ -723,6 +728,168 @@ mainScene.createEnemyAnimation = function(enemy){
         repeat: 0
     });
 }
+mainScene.startPoliceSpawn = function(){
+    this.policeGroup = this.physics.add.group();
+    this.createPolice();
+    var policedirection = 'down';
+    this.physics.add.collider(this.policeGroup,this.borderLayer,this.hitWall,null,this);
+    this.physics.add.collider(this.policeGroup,this.worldLayer,this.hitWall,null,this);
+    this.physics.add.collider(this.policeGroup,this.policeGroup);
+    this.policeNumber = 1;
+    this.policeSpawn = this.time.addEvent({
+        delay:1000,
+        callback:this.createPolice,
+        loop:true,
+        callbackScope:this
+    });
+}
+
+mainScene.createPolice = function(){
+    var maxPolice = 5;
+    this.pNumber = this.policeNumber;
+    if(this.pNumber >= maxPolice){
+        return;
+    }
+    this.policeNumber+= 1;
+    var policeposition = [[9,12],[30,45],[31,6],[25,25]];
+    var position = Phaser.Math.RND.pick(policeposition);
+    var x = position[0];
+    var y = position[1];
+    // 敵作成
+    var police = this.policeGroup.create(x*16*4, y*16*4,'FBI');
+    // 敵のサイズ変更
+    //enemy.body.setSize(350,350);
+    police.setDisplaySize(this.TILE_WIDTH * this.TILE_SCALE,this.TILE_HEIGTH * this.TILE_SCALE,);
+    police.setCollideWorldBounds(true);
+    this.createPoliceAnimation(police);
+    // 敵の移動速度をランダムに設定する
+    //var speed = Phaser.Math.RND.pick(this.enemySpeed);
+    //enemy.setVelocityX(speed);
+    police.foundPlayer = true;
+    police.isDamage = false;
+    this.MovePolice(police);
+
+}
+mainScene.createPoliceAnimation = function(police){
+    // 最初のフレームを0番にする
+    police.setFrame(0);
+    // 正面を向く
+    this.anims.create({
+        key: 'policeturn',
+        frames: [ { key: 'FBI', frame: 0 } ],
+        frameRate: 20
+    });
+    // 左向きのアニメーション
+    this.anims.create({
+        key: 'policeleft',
+        frames: this.anims.generateFrameNumbers('FBI', { start: 3, end: 4 }),
+        frameRate: 10,
+        repeat: -1
+    });
+    // 右向きのアニメーション
+    this.anims.create({
+        key: 'policeright',
+        frames: this.anims.generateFrameNumbers('FBI', { start: 1, end: 2 }),
+        frameRate: 10,
+        repeat: -1
+    });
+    // 上向きのアニメーション
+    this.anims.create({
+        key: 'policeup',
+        frames: this.anims.generateFrameNumbers('FBI', { start: 5, end: 6 }),
+        frameRate: 10,
+        repeat: -1
+    });
+    // 下向きのアニメーション
+    this.anims.create({
+        key: 'policedown',
+        frames: this.anims.generateFrameNumbers('FBI', { start: 7, end: 8 }),
+        frameRate: 10,
+        repeat: -1
+    });
+    //右向きパンチ
+    this.anims.create({
+        key: 'policePunchRight',
+        frames: this.anims.generateFrameNumbers('FBI', { start: 9, end: 10 }),
+        frameRate: 2,
+        repeat: 0
+    });
+    //左向きパンチ
+    this.anims.create({
+        key: 'policePunchLeft',
+        frames: this.anims.generateFrameNumbers('FBI', { start: 11, end: 12 }),
+        frameRate: 2,
+        repeat: 0
+    });
+    //下向きパンチ
+    this.anims.create({
+        key: 'policePunchDown',
+        frames: this.anims.generateFrameNumbers('FBI', { start: 13, end: 14 }),
+        frameRate: 2,
+        repeat: 0
+    });
+    //上向きパンチ
+    this.anims.create({
+        key: 'policePunchUp',
+        frames: this.anims.generateFrameNumbers('FBI', { start: 15, end: 16 }),
+        frameRate: 2,
+        repeat: 0
+    });
+}
+mainScene.MovePolice = function(police){
+    if(police.active == true){
+        var speed = 250;
+        var degree = Phaser.Math.Angle.Between(police.x, police.y, this.player.x, this.player.y);
+        var angle = Phaser.Math.RadToDeg(degree);
+        let distance = Math.sqrt(Math.pow(this.player.x - police.x, 2) + Math.pow(this.player.y - police.y, 2));
+        if(distance > 100){
+            this.policePunching = true;
+            police.anims.play('policePunchRight',false);
+            police.anims.play('policePunchLeft',false);
+            police.anims.play('policePunchUp',false);
+            police.anims.play('policePunchDown',false);
+            if(angle>-55 && angle<0 || angle > 0 && angle < 45){
+                police.anims.play('policeright',true);
+            }else if(angle>135 && angle<180 || angle < -180 && angle > -145){
+                police.anims.play('policeleft',true);
+            }else if(angle > -145 && angle < -55){
+                police.anims.play('policeup',true);
+            }else if(angle>45 && angle<135){
+                police.anims.play('policedown',true);
+            };
+            police.setVelocityX(speed * Math.cos(degree));
+            police.setVelocityY(speed * Math.sin(degree));
+        }else if(distance < 100){
+            //リセット
+            police.setVelocityX(0);
+            police.setVelocityY(0);
+            //攻撃
+            if(angle>-55 && angle<0 || angle > 0 && angle < 45 && !this.policePunching){
+                police.direction = "right";
+                police.anims.play('policePunchRight',true);
+                this.policePunching = true;
+            }else if(angle>135 && angle<180 || angle < -180 && angle > -145  && !this.policePunching){
+                police.direction = "left";
+                police.anims.play('policePunchLeft',true);
+                this.policePunching = true
+            }else if(angle > -145 && angle < -55 && !this.policePunching){
+                police.direction = "up";
+                police.anims.play('policePunchUp',true);
+                this.policePunching = true;
+            }else if(angle>45 && angle<135 && !this.policePunching){
+                police.direction = "down";
+                police.anims.play('policePunchDown',true);
+                this.policePunching = true;
+            };
+            let distance = Math.sqrt(Math.pow(this.player.x - createPolice.x, 2) + Math.pow(this.player.y - police.y, 2));
+            this.PlayerDamage(police, distance);
+            this.time.delayedCall(500,this.policeSetPunchFalse,[],this);
+        };
+    };
+}
+mainScene.policeSetPunchFalse = function() {
+    this.policePunching = false;
+};
 mainScene.createPunchGroup = function(){
     this.createAttackAnimation();
     this.PunchGroup = this.physics.add.group();

@@ -22,6 +22,10 @@ loadScene.preload = function() {
         frameWidth: 51,
         frameHeight: 64,
     });
+    this.load.spritesheet("FBI", "assets/images/FBI.png", {
+        frameWidth: 51,
+        frameHeight: 64,
+    });
     this.load.spritesheet("Car01", "assets/images/CarOrange.png", {
         frameWidth:1935,
         frameHeight:1935,
