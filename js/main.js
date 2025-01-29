@@ -404,7 +404,11 @@ mainScene.createEnemy = function(){
 }
 mainScene.hitWall = function(enemy,layer){
     enemy.foundPlayer = false;
-    this.actionBGM.stop();
+    if(this.actionBGM){
+        this.actionBGM.stop();
+    }else{
+        console.warn('actionBGM is undefined')
+    }
     enemy.direction = enemydirection;
     this.enemySpeed = [100,150,200,];
     var enemypowerinhitwall = Phaser.Math.RND.pick(this.enemySpeed);
