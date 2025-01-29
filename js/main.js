@@ -1228,11 +1228,12 @@ mainScene.PlayerAttack = function(enemy, attack){
         enemy.destroy();
         this.enemyNumber -= 1;
         this.kills += 1;
-        if(enemy == this.enemyGroup){
-            this.setMoney(5, "Add");
-        }else if(enemy == this.policeGroup){
-            this.setMoney(15, "Add");
+        if(this.policeGroup.contains(enemy)){
+            this.setMoney(15,"Add");
+        }else{
+            this.setMoney(5,"Add");
         }
+
         var anyEnemyFoundPlayer = this.enemyGroup.getChildren().some(function(enemy) {
             return enemy.foundPlayer;
         });
@@ -1247,6 +1248,7 @@ mainScene.PlayerAttack = function(enemy, attack){
         this.time.delayedCall(1000,function(){
             enemy.isDamage = false;
         }, [], this);
+
         if(this.kills >= 20){
             //Police(?)
             this.wanted = true;
