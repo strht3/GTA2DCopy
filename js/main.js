@@ -353,7 +353,7 @@ mainScene.setCollider = function(){
 mainScene.TouchedArea = function(area, enemy){
     enemy.foundPlayer = true;
     if(!this.actionBGM){
-        this.actionBGM = this.sound.add("Battle", {volume: 1, loop : true});
+        this.actionBGM = this.sound.add("Battle", {volume: 0.3, loop : true});
     }
     if(!this.actionBGM.isPlaying){
         this.actionBGM.play();
