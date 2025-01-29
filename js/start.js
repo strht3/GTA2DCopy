@@ -1,7 +1,7 @@
 // スタート画面のシーン
 var startScene = new Phaser.Scene("startScene");
 startScene.create = function () {
-    //this.sound.play('Start', {volume: 0.1,loop:true});
+    this.sound.play("Opening", {volume: 1, loop:true});
     var centerX = this.game.config.width / 2;
     var centerY = this.game.config.height / 2;
     this.background = this.add.image(centerX,centerY,'background');

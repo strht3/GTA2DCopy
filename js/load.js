@@ -74,6 +74,9 @@ loadScene.preload = function() {
     this.load.audio("EnemyDeath","assets/Audios/「くおぉっ！」.mp3");
     this.load.audio("Death","assets/Audios/「ぐああーーっ！」.mp3");
     this.load.audio("Damage","assets/Audios/打撃7.mp3");
+
+    this.load.audio("Battle","assets/Audios/BattleMusic.mp3");
+    this.load.audio("Opening","assets/Audios/Opening.mp3");
 };
 
 loadScene.create = function() {
