@@ -1,8 +1,10 @@
 // スタート画面のシーン
 var startScene = new Phaser.Scene("startScene");
+startScene.preload = function () {
+    // Preload the audio file
+    this.load.audio("Opening", 'assets/Audios/Opening.mp3'); // Update the path to the actual audio file
+};
 startScene.create = function () {
-    this.openingBGM = this.sound.add("Opening", {volume: 1, loop:true});
-    this.openingBGM.play();
     var centerX = this.game.config.width / 2;
     var centerY = this.game.config.height / 2;
     this.background = this.add.image(centerX,centerY,'background');
@@ -30,9 +32,16 @@ startScene.create = function () {
     }else{
         this.item = JSON.parse(localStorage.getItem('items'));
     }
+    // Attempt to play the audio automatically
+    this.openingBGM = this.sound.add("Opening", { volume: 1, loop: true });
+    this.openingBGM.play().catch(function(error) {
+        console.log('Audio playback failed:', error);
+    });
     // キーをクリックするとゲームスタート
     this.input.keyboard.on('keydown', function(event) {
-        this.openingBGM.stop();
+        if(this.openingBGM){
+            this.openingBGM.stop();
+        }
         if(!this.scene.isSleeping("Inventory")) {
             // インベントリシーンを起動
             this.scene.start("Inventory",{
