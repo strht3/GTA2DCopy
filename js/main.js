@@ -1101,8 +1101,12 @@ mainScene.setMoney = function(amount, addOrSet){
 }
 mainScene.wantedbyPolice = function(){
     if(this.wanted == true){
-        this.sound.play("Wanted", {volume: 0.3, loop:true});
-
+        if(!this.wantedsound){
+            this.wantedsound = this.sound.add("Wanted", {volume: 0.3, loop : true});
+        }
+        if(!this.wantedsound.isPlaying){
+            this.wantedsound.play();
+        }
         var CrimeLevel = 1
         if(this.kills >= 20 && this.kills < 30){
             CrimeLevel = 1
@@ -1116,7 +1120,7 @@ mainScene.wantedbyPolice = function(){
             CrimeLevel = 5
         }
         var kills = "Level " + CrimeLevel;
-        this.CrimeLevel = this.add.text(400, 50, kills, { color: '#ff0000', fontSize: '60px' ,fontFamily: 'gtaFontNormal'});
+        this.CrimeLevel = this.add.text(1200, 50, kills, { color: '#ff0000', fontSize: '60px' ,fontFamily: 'gtaFontNormal'});
         this.CrimeLevel.setScrollFactor(0);
     }
 }
