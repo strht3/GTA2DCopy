@@ -984,7 +984,9 @@ mainScene.PlayerAttack = function(enemy, attack){
     enemy.destroy();
     this.enemyNumber -= 1;
     this.setMoney(5, "Add");
-    this.actionBGM.stop();
+    if(actionBGM){
+        this.actionBGM.stop();
+    };
     this.sound.play("EnemyDeath", {volume: 0.5, loop:false});
     this.sound.play('Earn', {volume: 1, loop:false});
 }
