@@ -1221,6 +1221,9 @@ mainScene.carCrush = function(car, layer){
 }
 mainScene.PlayerAttack = function(enemy, attack){
     console.log(enemy);
+    if(this.policeGroup.contains(enemy)){
+        console.log("Attack is touching police")
+    }
     if(this.attacktype == 'fireball'){
         attack.destroy();
     };
