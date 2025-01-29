@@ -737,6 +737,7 @@ mainScene.startPoliceSpawn = function(){
     this.physics.add.collider(this.policeGroup,this.borderLayer,this.policehitWall,null,this);
     this.physics.add.collider(this.policeGroup,this.worldLayer,this.policehitWall,null,this);
     this.physics.add.collider(this.policeGroup,this.policeGroup);
+    this.physics.add.overlap(this.policeGroup,this.PunchGroup,this.PlayerAttack,null,this);
     this.policeNumber = 1;
     this.policeSpawn = this.time.addEvent({
         delay:1000,
@@ -955,7 +956,6 @@ mainScene.createPunchGroup = function(){
     this.createAttackAnimation();
     this.PunchGroup = this.physics.add.group();
     this.physics.add.overlap(this.enemyGroup,this.PunchGroup,this.PlayerAttack,null,this);
-    this.physics.add.overlap(this.policeGroup,this.PunchGroup,this.PlayerAttack,null,this);
     this.physics.add.collider(this.PunchGroup,this.worldLayer,this.punchHitWall,null,this);
     this.physics.add.collider(this.PunchGroup,this.borderLayer,this.punchHitWall,null,this);
 }
