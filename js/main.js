@@ -734,8 +734,8 @@ mainScene.startPoliceSpawn = function(){
     this.policeGroup = this.physics.add.group();
     this.createPolice();
     var policedirection = 'down';
-    this.physics.add.collider(this.policeGroup,this.borderLayer,this.hitWall,null,this);
-    this.physics.add.collider(this.policeGroup,this.worldLayer,this.hitWall,null,this);
+    this.physics.add.collider(this.policeGroup,this.borderLayer,this.policehitWall,null,this);
+    this.physics.add.collider(this.policeGroup,this.worldLayer,this.policehitWall,null,this);
     this.physics.add.collider(this.policeGroup,this.policeGroup);
     this.policeNumber = 1;
     this.policeSpawn = this.time.addEvent({
@@ -841,6 +841,63 @@ mainScene.createPoliceAnimation = function(police){
         frameRate: 2,
         repeat: 0
     });
+}
+mainScene.policehitWall = function(police,layer){
+    var anyEnemyFoundPlayer = this.enemyGroup.getChildren().some(function(enemy){
+        return enemy.foundPlayer;
+    });
+
+    if(!anyEnemyFoundPlayer && this.actionBGM){
+        this.actionBGM.stop();
+    }
+    enemy.direction = enemydirection;
+    this.enemySpeed = [100,150,200,];
+    var enemypowerinhitwall = Phaser.Math.RND.pick(this.enemySpeed);
+    var movementinhitwall
+    if(enemy.direction == 'right'){
+        movementinhitwall = 'left'
+    } else if(enemy.direction == 'left'){
+        movementinhitwall = 'right'
+    }else if(enemy.direction == 'up'){
+        movementinhitwall = 'down'
+    } else if(enemy.direction == 'down'){
+        movementinhitwall = 'up'
+    }
+    if(movementinhitwall == 'right') {
+        // 右に移動
+        //this.player.x += speed;
+        enemy.direction == 'right';
+        enemy.setVelocityX(enemypowerinhitwall);
+        // 右向きのアニメーション
+        enemy.anims.play('enemyright',true)
+    } else if(movementinhitwall == 'left') {
+        // 左に移動
+        //this.player.x -= speed;
+        enemy.direction == 'left';
+        enemy.setVelocityX(-enemypowerinhitwall);
+        // 左向きのアニメーション
+        enemy.anims.play('enemyleft',true)
+    } else if(movementinhitwall == 'up') {
+        // 上に移動
+        //this.player.y -= speed;
+        enemy.direction == 'up';
+        enemy.setVelocityY(-enemypowerinhitwall);
+        // 上向きのアニメーション
+        enemy.anims.play('enemyup',true)
+    } else if(movementinhitwall== 'down') {
+        // 下に移動
+        //this.player.y += speed;
+        enemy.direction == 'down';
+        enemy.setVelocityY(enemypowerinhitwall);
+        // 下向きのアニメーション
+        enemy.anims.play('enemydown',true)
+    }else if(movementinhitwall == 'turn'){
+        enemy.setVelocity(0);
+        // キーを放すとアニメーション停止
+        enemy.anims.stop();
+        //キーを放すと正面を向く
+        enemy.anims.play('enemyturn', true);
+    }
 }
 mainScene.MovePolice = function(police){
     if(police.active == true){
@@ -1166,22 +1223,33 @@ mainScene.PlayerAttack = function(enemy, attack){
     if(this.attacktype == 'fireball'){
         attack.destroy();
     };
-    enemy.destroy();
-    this.enemyNumber -= 1;
-    this.kills += 1;
-    this.setMoney(5, "Add");
-    var anyEnemyFoundPlayer = this.enemyGroup.getChildren().some(function(enemy) {
-        return enemy.foundPlayer;
-    });
+    if(!enemy.isDamage){
+        enemy.destroy();
+        this.enemyNumber -= 1;
+        this.kills += 1;
+        if(enemy == this.enemyGroup){
+            this.setMoney(5, "Add");
+        }else if(enemy == this.policeGroup){
+            this.setMoney(15, "Add");
+        }
+        var anyEnemyFoundPlayer = this.enemyGroup.getChildren().some(function(enemy) {
+            return enemy.foundPlayer;
+        });
 
-    if (!anyEnemyFoundPlayer && this.actionBGM) {
-        this.actionBGM.stop();
-    }
-    this.sound.play("EnemyDeath", {volume: 0.5, loop:false});
-    this.sound.play('Earn', {volume: 1, loop:false});
-    if(this.kills == 20){
-        //Police(?)
-        this.wanted = true;
+        if (!anyEnemyFoundPlayer && this.actionBGM) {
+            this.actionBGM.stop();
+        }
+        this.sound.play("EnemyDeath", {volume: 0.5, loop:false});
+        this.sound.play('Earn', {volume: 1, loop:false});
+
+        enemy.isDamage = true;
+        this.time.delayedCall(1000,function(){
+            enemy.isDamage = false;
+        }, [], this);
+        if(this.kills >= 20){
+            //Police(?)
+            this.wanted = true;
+        }
     }
 }
 mainScene.punchFalse = function(){
