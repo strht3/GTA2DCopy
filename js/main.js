@@ -1070,6 +1070,8 @@ mainScene.Die = function(){
 }
 mainScene.DestroyEnemyOnCollide = function(hitObject, enemy){
     if(hitObject.objectType = "Car"){
+        this.sound.play("CrushCar", {volume: 0.5, loop:false});
+        this.sound.play("EnemyDeath", {volume: 0.5, loop:false});
         enemy.destroy();
     }
 }
