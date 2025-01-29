@@ -1107,17 +1107,17 @@ mainScene.wantedbyPolice = function(){
         if(!this.wantedsound.isPlaying){
             this.wantedsound.play();
         }
-        var CrimeLevel = 1
+        var CrimeLevel = "!"
         if(this.kills >= 20 && this.kills < 30){
-            CrimeLevel = 1
+            CrimeLevel = "!"
         }else if(this.kills >= 30 && this.kills < 40){
-            CrimeLevel = 2
+            CrimeLevel = "!!"
         }else if(this.kills >= 40 && this.kills < 60){
-            CrimeLevel = 3
+            CrimeLevel = "!!!"
         }else if(this.kills >= 60 && this.kills < 100){
-            CrimeLevel = 4
+            CrimeLevel = "!!!!"
         }else if(this.kills >= 100){
-            CrimeLevel = 5
+            CrimeLevel = "!!!!!"
         }
         var kills = "Level " + CrimeLevel;
         this.CrimeLevel = this.add.text(1200, 50, kills, { color: '#ff0000', fontSize: '60px' ,fontFamily: 'gtaFontNormal'});
