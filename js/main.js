@@ -843,60 +843,60 @@ mainScene.createPoliceAnimation = function(police){
     });
 }
 mainScene.policehitWall = function(police,layer){
-    var anyEnemyFoundPlayer = this.enemyGroup.getChildren().some(function(enemy){
-        return enemy.foundPlayer;
+    var anypoliceFoundPlayer = this.policeGroup.getChildren().some(function(police){
+        return police.foundPlayer;
     });
 
-    if(!anyEnemyFoundPlayer && this.actionBGM){
+    if(!anypoliceFoundPlayer && this.actionBGM){
         this.actionBGM.stop();
     }
-    enemy.direction = enemydirection;
-    this.enemySpeed = [100,150,200,];
-    var enemypowerinhitwall = Phaser.Math.RND.pick(this.enemySpeed);
+    police.direction = enemydirection;
+    this.policeSpeed = [100,150,200,];
+    var policepowerinhitwall = Phaser.Math.RND.pick(this.policeSpeed);
     var movementinhitwall
-    if(enemy.direction == 'right'){
+    if(police.direction == 'right'){
         movementinhitwall = 'left'
-    } else if(enemy.direction == 'left'){
+    } else if(police.direction == 'left'){
         movementinhitwall = 'right'
-    }else if(enemy.direction == 'up'){
+    }else if(police.direction == 'up'){
         movementinhitwall = 'down'
-    } else if(enemy.direction == 'down'){
+    } else if(police.direction == 'down'){
         movementinhitwall = 'up'
     }
     if(movementinhitwall == 'right') {
         // 右に移動
         //this.player.x += speed;
-        enemy.direction == 'right';
-        enemy.setVelocityX(enemypowerinhitwall);
+        police.direction == 'right';
+        police.setVelocityX(policepowerinhitwall);
         // 右向きのアニメーション
-        enemy.anims.play('enemyright',true)
+        police.anims.play('policeright',true)
     } else if(movementinhitwall == 'left') {
         // 左に移動
         //this.player.x -= speed;
-        enemy.direction == 'left';
-        enemy.setVelocityX(-enemypowerinhitwall);
+        police.direction == 'left';
+        police.setVelocityX(-policepowerinhitwall);
         // 左向きのアニメーション
-        enemy.anims.play('enemyleft',true)
+        police.anims.play('policeleft',true)
     } else if(movementinhitwall == 'up') {
         // 上に移動
         //this.player.y -= speed;
-        enemy.direction == 'up';
-        enemy.setVelocityY(-enemypowerinhitwall);
+        police.direction == 'up';
+        police.setVelocityY(-policepowerinhitwall);
         // 上向きのアニメーション
-        enemy.anims.play('enemyup',true)
+        police.anims.play('policeup',true)
     } else if(movementinhitwall== 'down') {
         // 下に移動
         //this.player.y += speed;
-        enemy.direction == 'down';
-        enemy.setVelocityY(enemypowerinhitwall);
+        police.direction == 'down';
+        police.setVelocityY(policepowerinhitwall);
         // 下向きのアニメーション
-        enemy.anims.play('enemydown',true)
+        police.anims.play('policedown',true)
     }else if(movementinhitwall == 'turn'){
-        enemy.setVelocity(0);
+        police.setVelocity(0);
         // キーを放すとアニメーション停止
-        enemy.anims.stop();
+        police.anims.stop();
         //キーを放すと正面を向く
-        enemy.anims.play('enemyturn', true);
+        police.anims.play('policeturn', true);
     }
 }
 mainScene.MovePolice = function(police){
