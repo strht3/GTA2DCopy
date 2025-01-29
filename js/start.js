@@ -1,7 +1,8 @@
 // スタート画面のシーン
 var startScene = new Phaser.Scene("startScene");
 startScene.create = function () {
-    this.sound.play("Opening", {volume: 1, loop:true});
+    this.openingBGM = this.sound.add("Opening", {volume: 1, loop:true});
+    this.openingBGM.play();
     var centerX = this.game.config.width / 2;
     var centerY = this.game.config.height / 2;
     this.background = this.add.image(centerX,centerY,'background');
@@ -31,6 +32,7 @@ startScene.create = function () {
     }
     // キーをクリックするとゲームスタート
     this.input.keyboard.on('keydown', function(event) {
+        this.openingBGM.stop();
         if(!this.scene.isSleeping("Inventory")) {
             // インベントリシーンを起動
             this.scene.start("Inventory",{
