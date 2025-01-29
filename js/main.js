@@ -729,17 +729,15 @@ mainScene.createAttackAnimation = function(){
         frameRate: 5,
         repeat: 0
     });
-    this.anims.create({
-        key: 'machinegun',
-        frames: this.anims.generateFrameNumbers('machinegun', { start: 0, end: 1 }),
-        frameRate: 10,
-        repeat: 5
-    });
 }
 mainScene.punchBeam = function(direction){
     var posX = this.player.x;
     var posY = this.player.y;
-    var punch = this.PunchGroup.create(posX, posY, this.attacktype);
+    var imagetype = this.attacktype;
+    if(imagetype === 'machinegun'){
+        imagetype = 'bullet'
+    }
+    var punch = this.PunchGroup.create(posX, posY, imagetype);
     var punchdelay = 500;
     punch.on('animationcomplete', function(){
         punch.destroy();
@@ -824,23 +822,19 @@ mainScene.punchBeam = function(direction){
     }else if(this.attacktype === 'machinegun'){
         this.sound.play("Bullet", {volume: 1, loop:false});
         punchdelay = 10;
-        punch.setDisplaySize(500,500);
+        punch.setDisplaySize(15,15);
         if(direction == 'right'){
             punch.setAngle(90);
-            punch.x += 250;
-            punch.anims.play('machinegun',true);
+            punch.setVelocityX(600);
         }else if(direction == 'left'){
             punch.setAngle(270);
-            punch.x -= 250;
-            punch.anims.play('machinegun',true);
+            punch.setVelocityX(-600);
         }else if(direction == 'down'){
             punch.setAngle(180);
-            punch.y += 250;
-            punch.anims.play('machinegun',true);
+            punch.setVelocityY(600)
         }else if(direction == 'up'){
             punch.setAngle(0);
-            punch.y -= 250;
-            punch.anims.play('machinegun',true);
+            punch.setVelocityY(-600);
         }
     }
     this.sound.play('punch', {volume: 1, loop:false});

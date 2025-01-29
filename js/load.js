@@ -38,10 +38,6 @@ loadScene.preload = function() {
         frameWidth:200,
         frameHeight:159,
     });
-    this.load.spritesheet("machinegun", "assets/images/Bullets.png", {
-        frameWidth:1800,
-        frameHeight:3900,
-    });
     
     //Attacks Load
     this.load.image('fireball', "assets/images/波動拳.png");
@@ -71,7 +67,6 @@ loadScene.preload = function() {
     this.load.audio("Buy","assets/Audios/購入.mp3");
     this.load.audio("Earn","assets/Audios/小銭.mp3");
     this.load.audio("Cancel","assets/Audios/ビープ音1.mp3");
-    this.load.audio("machinegun","assets/Audios/サブマシンガン発射2.mp3");
     this.load.audio("KnifeSlash","assets/Audios/ナイフを投げる.mp3");
     this.load.audio("KatanaSlash","assets/Audios/剣で斬る2.mp3");
     this.load.audio("Explosion","assets/Audios/岩が真っ二つに割れる.mp3");
