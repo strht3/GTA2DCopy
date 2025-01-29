@@ -353,9 +353,11 @@ mainScene.setCollider = function(){
 mainScene.TouchedArea = function(area, enemy){
     enemy.foundPlayer = true;
     if(!this.actionBGM){
-        this.actionBGM = this.sound.add("Battle", {volume: 1, Loop : true});
+        this.actionBGM = this.sound.add("Battle", {volume: 1, loop : true});
     }
-    this.actionBGM.play();
+    if(!this.actionBGM.isPlaying){
+        this.actionBGM.play();
+    }
 };
 mainScene.createEnemyGroup = function(){
     this.enemyGroup = this.physics.add.group();
@@ -408,10 +410,13 @@ mainScene.createEnemy = function(){
 }
 mainScene.hitWall = function(enemy,layer){
     enemy.foundPlayer = false;
-    if(this.actionBGM){
+
+    var anyEnemyFoundPlayer = this.enemyGroup.getChildren().some(function(enemy){
+        return enemy.foundPlayer;
+    });
+
+    if(!anyEnemyFoundPlayer && this.actionBGM){
         this.actionBGM.stop();
-    }else{
-        console.warn('actionBGM is undefined')
     }
     enemy.direction = enemydirection;
     this.enemySpeed = [100,150,200,];
@@ -984,9 +989,13 @@ mainScene.PlayerAttack = function(enemy, attack){
     enemy.destroy();
     this.enemyNumber -= 1;
     this.setMoney(5, "Add");
-    if(this.actionBGM){
+    var anyEnemyFoundPlayer = this.enemyGroup.getChildren().some(function(enemy) {
+        return enemy.foundPlayer;
+    });
+
+    if (!anyEnemyFoundPlayer && this.actionBGM) {
         this.actionBGM.stop();
-    };
+    }
     this.sound.play("EnemyDeath", {volume: 0.5, loop:false});
     this.sound.play('Earn', {volume: 1, loop:false});
 }
