@@ -76,6 +76,7 @@ loadScene.preload = function() {
     this.load.audio("Damage","assets/Audios/打撃7.mp3");
     this.load.audio("CrushCar","assets/Audios/カークラッシュ.mp3");
     this.load.audio("Battle","assets/Audios/BattleMusic.mp3");
+    this.load.audio("Wanted","assets/Audios/パトカー.mp3");
 };
 
 loadScene.create = function() {

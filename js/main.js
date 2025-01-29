@@ -39,6 +39,8 @@ mainScene.create = function (data) {
     this.keys.key5 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.FIVE);
 
     this.actionBGM = null;
+
+    this.kills = 0;
 };
 mainScene.update = function() {
     //move player if it is showed
@@ -583,7 +585,7 @@ mainScene.itemchange = function(){
         var subattack = 'Bat';
     }
     this.attacktype = subattack;
-    
+
     if(this.keys.key1.isDown){
         if(this.item.Hand[0] == null){
             this.attacktype = 'fireball';
@@ -1004,6 +1006,7 @@ mainScene.PlayerAttack = function(enemy, attack){
     };
     enemy.destroy();
     this.enemyNumber -= 1;
+    this.kills += 1;
     this.setMoney(5, "Add");
     var anyEnemyFoundPlayer = this.enemyGroup.getChildren().some(function(enemy) {
         return enemy.foundPlayer;
@@ -1014,6 +1017,10 @@ mainScene.PlayerAttack = function(enemy, attack){
     }
     this.sound.play("EnemyDeath", {volume: 0.5, loop:false});
     this.sound.play('Earn', {volume: 1, loop:false});
+    if(this.kills == 20){
+        //Police(?)
+        this.wantedbyPolice();
+    }
 }
 mainScene.punchFalse = function(){
     this.player.isPunching = false;
@@ -1105,4 +1112,23 @@ mainScene.setMoney = function(amount, addOrSet){
     //localStorage.setItem('items',this.item);
     localStorage.setItem('items',JSON.stringify(this.item));
     localStorage.setItem('health',this.PlayerHealth);
+}
+mainScene.wantedbyPolice = function(){
+    this.sound.play("Wanted", {volume: 0.3, loop:true});
+
+    var CrimeLevel = 1
+    if(this.kills >= 20 && this.kills < 30){
+        CrimeLevel = 1
+    }else if(this.kills >= 30 && this.kills < 40){
+        CrimeLevel = 2
+    }else if(this.kills >= 40 && this.kills < 60){
+        CrimeLevel = 3
+    }else if(this.kills >= 60 && this.kills < 100){
+        CrimeLevel = 4
+    }else if(this.kills >= 100){
+        CrimeLevel = 5
+    }
+    var kills = "Level " + CrimeLevel;
+    this.CrimeLevel = this.add.text(400, 50, hpText, { color: '#ff0000', fontSize: '60px' ,fontFamily: 'gtaFontNormal'});
+    this.CrimeLevel.setScrollFactor(0);
 }
