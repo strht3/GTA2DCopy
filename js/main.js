@@ -1220,6 +1220,7 @@ mainScene.carCrush = function(car, layer){
     car.destroy();
 }
 mainScene.PlayerAttack = function(enemy, attack){
+    console.log(enemy);
     if(this.attacktype == 'fireball'){
         attack.destroy();
     };
