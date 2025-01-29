@@ -41,6 +41,7 @@ mainScene.create = function (data) {
     this.actionBGM = null;
 
     this.kills = 0;
+    this.wanted = false;
 };
 mainScene.update = function() {
     //move player if it is showed
@@ -49,6 +50,7 @@ mainScene.update = function() {
     }
     this.healPlayerHealthBySecond();
     this.itemchange();
+    this.wantedbyPolice();
 };
 mainScene.config = function () {
     //datas
@@ -1019,7 +1021,7 @@ mainScene.PlayerAttack = function(enemy, attack){
     this.sound.play('Earn', {volume: 1, loop:false});
     if(this.kills == 20){
         //Police(?)
-        this.wantedbyPolice();
+        this.wanted = true;
     }
 }
 mainScene.punchFalse = function(){
@@ -1114,21 +1116,23 @@ mainScene.setMoney = function(amount, addOrSet){
     localStorage.setItem('health',this.PlayerHealth);
 }
 mainScene.wantedbyPolice = function(){
-    this.sound.play("Wanted", {volume: 0.3, loop:true});
+    if(this.wanted == true){
+        this.sound.play("Wanted", {volume: 0.3, loop:true});
 
-    var CrimeLevel = 1
-    if(this.kills >= 20 && this.kills < 30){
-        CrimeLevel = 1
-    }else if(this.kills >= 30 && this.kills < 40){
-        CrimeLevel = 2
-    }else if(this.kills >= 40 && this.kills < 60){
-        CrimeLevel = 3
-    }else if(this.kills >= 60 && this.kills < 100){
-        CrimeLevel = 4
-    }else if(this.kills >= 100){
-        CrimeLevel = 5
+        var CrimeLevel = 1
+        if(this.kills >= 20 && this.kills < 30){
+            CrimeLevel = 1
+        }else if(this.kills >= 30 && this.kills < 40){
+            CrimeLevel = 2
+        }else if(this.kills >= 40 && this.kills < 60){
+            CrimeLevel = 3
+        }else if(this.kills >= 60 && this.kills < 100){
+            CrimeLevel = 4
+        }else if(this.kills >= 100){
+            CrimeLevel = 5
+        }
+        var kills = "Level " + CrimeLevel;
+        this.CrimeLevel = this.add.text(400, 50, hpText, { color: '#ff0000', fontSize: '60px' ,fontFamily: 'gtaFontNormal'});
+        this.CrimeLevel.setScrollFactor(0);
     }
-    var kills = "Level " + CrimeLevel;
-    this.CrimeLevel = this.add.text(400, 50, hpText, { color: '#ff0000', fontSize: '60px' ,fontFamily: 'gtaFontNormal'});
-    this.CrimeLevel.setScrollFactor(0);
 }
