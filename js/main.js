@@ -821,7 +821,7 @@ mainScene.punchBeam = function(direction){
         }
     }else if(this.attacktype === 'machinegun'){
         this.sound.play("Bullet", {volume: 1, loop:false});
-        punchdelay = 10;
+        punchdelay = 100;
         punch.setDisplaySize(15,15);
         if(direction == 'right'){
             punch.setAngle(90);
